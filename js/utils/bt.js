@@ -29,7 +29,7 @@ export class Bt {
           return reject(error);
         }
 
-        if (device.name === 'LEDBLE-385C5590') {
+        if (device.name && device.name.startsWith('LEDBLE-')) {
           this.manager.stopDeviceScan();
 
           const char = await this.connectAndGetCharacteristic(device);

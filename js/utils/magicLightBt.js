@@ -131,7 +131,7 @@ export class MagicLightBt {
   };
 
   static writeMessage = (msg, target) =>
-    target instanceof Map
+    target instanceof Array
       ? Bt.broadcastMessage(target, msg)
       : Bt.writeMessage(target, msg);
 }
