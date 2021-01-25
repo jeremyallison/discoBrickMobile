@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {useSelector} from 'react-redux';
+import {StyleSheet} from 'react-native';
 import {
+  Drawer,
   Body,
+  Content,
   Button,
   Container,
   Left,
@@ -15,49 +18,70 @@ import {
 } from 'native-base';
 import {Row, Grid} from 'react-native-easy-grid';
 
-import {ConnectButton} from './components/connectButton.component';
-import {StripCounter} from './components/stripCounter.component';
-import {ColorPicker} from './components/colorpicker.component';
+import {Sidebar} from './components/sidebar.component';
+import {ColorPicker} from './components/colorPicker.component';
 
 export const Layout = () => {
   const strips = useSelector(({strips}) => strips);
+  const drawerRef = useRef();
+
+  closeDrawer = (drawerRef) => {
+    drawerRef.current._root.close();
+  };
+
+  openDrawer = (drawerRef) => {
+    drawerRef.current._root.open();
+  };
 
   return (
-    <Container>
-      <Header>
-        <Left>
-          <Button transparent>
-            <Icon name="menu" />
-          </Button>
-        </Left>
-        <Body>
-          <Title>DiscoBrick!</Title>
-        </Body>
-        <Right />
-      </Header>
-      <Grid>
-        <Row style={{height: 80, marginTop: 30, alignSelf: 'center'}}>
-          <ConnectButton />
-        </Row>
-        <StripCounter />
-        <Row>{strips.length ? <ColorPicker strips={strips} /> : null}</Row>
-      </Grid>
-      <Footer>
-        <FooterTab>
-          <Button vertical active>
-            <Icon name="color-palette" />
-            <Text>Single color</Text>
-          </Button>
-          <Button vertical>
-            <Icon name="color-wand-outline" />
-            <Text>Presets</Text>
-          </Button>
-          <Button vertical>
-            <Icon name="construct-outline" />
-            <Text>Sequence</Text>
-          </Button>
-        </FooterTab>
-      </Footer>
-    </Container>
+    <Drawer
+      ref={drawerRef}
+      content={<Sidebar />}
+      onClose={() => closeDrawer(drawerRef)}>
+      <Container>
+        <Header style={style.header}>
+          <Left>
+            <Button transparent onPress={() => openDrawer(drawerRef)}>
+              <Icon name="menu" />
+            </Button>
+          </Left>
+          <Body>
+            <Title>DiscoBrick!</Title>
+          </Body>
+          <Right />
+        </Header>
+        <Content style={style.content} scrollEnabled={false}>
+          <Grid>
+            <Row>{strips.length ? <ColorPicker strips={strips} /> : null}</Row>
+          </Grid>
+        </Content>
+        <Footer>
+          <FooterTab>
+            <Button vertical active>
+              <Icon name="color-palette" />
+              <Text>Single color</Text>
+            </Button>
+            <Button vertical>
+              <Icon name="color-wand-outline" />
+              <Text>Presets</Text>
+            </Button>
+            <Button vertical>
+              <Icon name="construct-outline" />
+              <Text>Sequence</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
+      </Container>
+    </Drawer>
   );
 };
+
+const style = StyleSheet.create({
+  header: {
+    // backgroundColor: '#2d678e',
+    color: '#FFFFFF',
+  },
+  content: {
+    backgroundColor: '#2d678e',
+  },
+});

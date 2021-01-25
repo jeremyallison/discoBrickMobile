@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 
 import {Text} from 'native-base';
 
-export const StripCounter = () => {
+export const ConnectedStripList = () => {
   const strips = useSelector(({strips}) => strips);
 
   return (

@@ -1,4 +1,6 @@
 rootProject.name = 'discoBrickMobile'
+include ':react-native-vector-icons'
+project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
 include ':react-native-color-panel'
 project(':react-native-color-panel').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-color-panel/android')
 include ':react-native-color-panel'

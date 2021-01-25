@@ -11,12 +11,13 @@ const asyncFilter = async (arr, predicate) => {
 export class Bt {
   static manager = new BleManager();
   static subscription;
+  static timeout;
 
   static subscribe() {
     this.subscription = this.manager.onStateChange((state) => {}, true);
   }
 
-  static async scanAndConnect() {
+  static async scanForDevices(addAvailableStrip) {
     return new Promise(async (resolve, reject) => {
       const state = await this.manager.state();
 
@@ -24,21 +25,38 @@ export class Bt {
         return reject('BT manager not ready, maybe BT is OFF?');
       }
 
+      // this.timeout = setTimeout(() => {
+      //   this.manager.stopDeviceScan();
+      //   resolve();
+      // }, 20000);
+
+      this.manager.stopDeviceScan();
       this.manager.startDeviceScan(null, null, async (error, device) => {
         if (error) {
           return reject(error);
         }
 
         if (device.name && device.name.startsWith('LEDBLE-')) {
-          this.manager.stopDeviceScan();
-
-          const char = await this.connectAndGetCharacteristic(device);
-
-          resolve({
-            device: device,
-            characteristic: char,
-          });
+          addAvailableStrip(device);
         }
+      });
+    });
+  }
+
+  static stopScanning() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+    this.manager.stopDeviceScan();
+  }
+
+  static async connectToDevice(device) {
+    return new Promise(async (resolve, reject) => {
+      const char = await this.connectAndGetCharacteristic(device).catch(reject);
+
+      resolve({
+        device: device,
+        characteristic: char,
       });
     });
   }
@@ -48,15 +66,18 @@ export class Bt {
     const services = await device.discoverAllServicesAndCharacteristics();
 
     return new Promise(async (resolve, reject) => {
-      await device.services().then(async (services) => {
-        await asyncFilter(services, async (service) => {
-          const serviceChars = await service.characteristics();
+      await device
+        .services()
+        .then(async (services) => {
+          await asyncFilter(services, async (service) => {
+            const serviceChars = await service.characteristics();
 
-          serviceChars.map((c) => c.uuid.startsWith('0000ffe9') && resolve(c));
-        });
-      });
-
-      reject('Device not found');
+            serviceChars.map(
+              (c) => c.uuid.startsWith('0000ffe9') && resolve(c),
+            );
+          });
+        })
+        .catch(console.log);
     });
   }
 

@@ -1,45 +1,38 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
+import {ActivityIndicator} from 'react-native';
 import {Button, Text} from 'native-base';
 
 import {Bt} from '../utils/bt';
-import {MagicLightBt} from '../utils/magicLightBt';
 
 import store from '../store';
-import {addStrip, removeStrip} from '../store/actions';
+import {
+  addAvailableStrip,
+  clearAvailableStrips,
+  setScanningState,
+} from '../store/actions';
 
-const onScanAndConnect = () => {
-  Bt.scanAndConnect()
-    .then(({device, characteristic}) => {
-      MagicLightBt.sayHello(characteristic);
-
-      store.dispatch(
-        addStrip({
-          device,
-          characteristic,
-          disconnectSubscription: device.onDisconnected(onDisconnect),
-        }),
-      );
-    })
+const onScanForDevices = () => {
+  store.dispatch(clearAvailableStrips());
+  store.dispatch(setScanningState(true));
+  Bt.scanForDevices((payload) => store.dispatch(addAvailableStrip(payload)))
+    .then(() => store.dispatch(setScanningState(false)))
     .catch(console.log);
 };
 
-const onDisconnect = (_e, device) => {
-  console.log('disconnected device', device.id);
+export const ConnectButton = (props) => {
+  const scanning = useSelector(({scanning}) => scanning);
 
-  const {strips} = store.getState();
-
-  const strip = strips && strips.find((strip) => strip.device.id == device.id);
-
-  if (strip) {
-    strip.disconnectSubscription.remove();
-    store.dispatch(removeStrip(device.id));
-  }
-};
-
-export const ConnectButton = () => {
   return (
-    <Button onPress={onScanAndConnect}>
+    <Button disabled={scanning} onPress={onScanForDevices} {...props}>
       <Text>Scan & find device</Text>
+      {scanning && (
+        <ActivityIndicator
+          size="small"
+          color="#ffffff"
+          style={{marginRight: 20}}
+        />
+      )}
     </Button>
   );
 };
