@@ -13,6 +13,7 @@
     "@react-native-community/slider": "^3.0.3",
     "Base64": "^1.1.0",
     "buffer": "^6.0.3",
+    "color-convert": "^2.0.1",
     "debounce": "^1.2.0",
     "expo-linear-gradient": "^9.0.0",
     "native-base": "^2.15.2",

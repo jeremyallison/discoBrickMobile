@@ -11,7 +11,6 @@ const asyncFilter = async (arr, predicate) => {
 export class Bt {
   static manager = new BleManager();
   static subscription;
-  static timeout;
 
   static subscribe() {
     this.subscription = this.manager.onStateChange((state) => {}, true);
@@ -24,11 +23,6 @@ export class Bt {
       if (state !== 'PoweredOn') {
         return reject('BT manager not ready, maybe BT is OFF?');
       }
-
-      // this.timeout = setTimeout(() => {
-      //   this.manager.stopDeviceScan();
-      //   resolve();
-      // }, 20000);
 
       this.manager.stopDeviceScan();
       this.manager.startDeviceScan(null, null, async (error, device) => {
@@ -44,9 +38,6 @@ export class Bt {
   }
 
   static stopScanning() {
-    if (this.timeout) {
-      clearTimeout(this.timeout);
-    }
     this.manager.stopDeviceScan();
   }
 

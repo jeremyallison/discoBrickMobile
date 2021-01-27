@@ -1,22 +1,19 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {useSelector} from 'react-redux';
 import {debounce} from 'lodash';
 import HsvColorPicker from 'react-native-hsv-color-picker';
 import {View} from 'react-native';
 
-import {MagicLightBt} from '../utils/magicLightBt';
-
-const hsv2rgb = ({hue, sat, val}) => {
-  const f = (n, k = (n + hue / 60) % 6) =>
-    val - val * sat * Math.max(Math.min(k, 4 - k, 1), 0);
-  return {
-    r: Math.round(f(5) * 255),
-    g: Math.round(f(3) * 255),
-    b: Math.round(f(1) * 255),
-  };
-};
+import store from '../../store/';
+import {setCurrentColor, setSelectedPreset} from '../../store/actions';
+import {MagicLightBt} from '../../utils/magicLightBt';
+import {hsv2rgb, rgb2hsv} from '../../utils/colors';
 
 export const ColorPicker = ({strips}) => {
-  const [hsv, setHsv] = useState({hue: 0, sat: 0, val: 1});
+  const hsv = useSelector(({currentColor}) => rgb2hsv(currentColor));
+  const setHsv = (newHsv) => {
+    store.dispatch(setCurrentColor(hsv2rgb(newHsv)));
+  };
 
   const onSatValPickerChange = ({saturation, value}, strips) => {
     const newHsv = {hue: hsv.hue, sat: saturation, val: value};
@@ -30,21 +27,24 @@ export const ColorPicker = ({strips}) => {
     setHsv(newHsv);
   };
 
-  const colorChangeHandler = debounce(MagicLightBt.sendColor, 20);
+  const colorChangeHandler = debounce((color, strips) => {
+    MagicLightBt.sendColor(color, strips);
+    store.dispatch(setSelectedPreset(null));
+  }, 25);
 
   return (
     <View>
       <HsvColorPicker
         huePickerBorderRadius={10}
         huePickerBarWidth={30}
-        huePickerBarHeight={300}
-        huePickerSliderSize={30}
-        satValPickerSize={300}
+        huePickerBarHeight={280}
+        huePickerSliderSize={35}
+        satValPickerSize={280}
         huePickerHue={hsv.hue}
         onHuePickerDragMove={(h) => onHuePickerChange(h, strips)}
         onHuePickerPress={(h) => onHuePickerChange(h, strips)}
         satValPickerBorderRadius={10}
-        satValPickerSliderSize={30}
+        satValPickerSliderSize={35}
         satValPickerHue={hsv.hue}
         satValPickerSaturation={hsv.sat}
         satValPickerValue={hsv.val}

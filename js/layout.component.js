@@ -1,86 +1,72 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {StyleSheet} from 'react-native';
-import {
-  Drawer,
-  Body,
-  Content,
-  Button,
-  Container,
-  Left,
-  Right,
-  Header,
-  Text,
-  Title,
-  Footer,
-  FooterTab,
-  Icon,
-} from 'native-base';
-import {Row, Grid} from 'react-native-easy-grid';
+import {Drawer, Content, Container} from 'native-base';
 
+import {ColorPickerPage} from './components/pages/colorPicker.page.component';
+import {PresetsPage} from './components/pages/presets.page.component';
+import {SequencePage} from './components/pages/sequence.page.component';
+
+import {Header} from './components/header.component';
 import {Sidebar} from './components/sidebar.component';
-import {ColorPicker} from './components/colorPicker.component';
+import {Footer} from './components/footer.component';
+
+import {Pages} from './components/pages/pages.constants';
 
 export const Layout = () => {
-  const strips = useSelector(({strips}) => strips);
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
   const drawerRef = useRef();
+  const activeTab = useSelector(({activeTab}) => activeTab);
 
-  closeDrawer = (drawerRef) => {
+  const closeDrawer = () => {
     drawerRef.current._root.close();
+    setDrawerOpen(false);
   };
 
-  openDrawer = (drawerRef) => {
+  const openDrawer = () => {
     drawerRef.current._root.open();
+    setDrawerOpen(true);
   };
+
+  let Tab;
+
+  switch (activeTab) {
+    case Pages.COLOR_PICKER:
+      Tab = <ColorPickerPage />;
+      break;
+
+    case Pages.PRESETS:
+      Tab = <PresetsPage />;
+      break;
+
+    case Pages.SEQUENCES:
+      Tab = <SequencePage />;
+      break;
+
+    default:
+      Tab = <ColorPickerPage />;
+  }
 
   return (
     <Drawer
       ref={drawerRef}
-      content={<Sidebar />}
-      onClose={() => closeDrawer(drawerRef)}>
+      content={<Sidebar isDrawerOpen={isDrawerOpen} />}
+      onClose={closeDrawer}>
       <Container>
-        <Header style={style.header}>
-          <Left>
-            <Button transparent onPress={() => openDrawer(drawerRef)}>
-              <Icon name="menu" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>DiscoBrick!</Title>
-          </Body>
-          <Right />
-        </Header>
-        <Content style={style.content} scrollEnabled={false}>
-          <Grid>
-            <Row>{strips.length ? <ColorPicker strips={strips} /> : null}</Row>
-          </Grid>
+        <Header openDrawerHandler={openDrawer} />
+        <Content
+          contentContainerStyle={{flex: 1, justifyContent: 'center'}}
+          style={style.content}
+          scrollEnabled={false}>
+          {Tab}
         </Content>
-        <Footer>
-          <FooterTab>
-            <Button vertical active>
-              <Icon name="color-palette" />
-              <Text>Single color</Text>
-            </Button>
-            <Button vertical>
-              <Icon name="color-wand-outline" />
-              <Text>Presets</Text>
-            </Button>
-            <Button vertical>
-              <Icon name="construct-outline" />
-              <Text>Sequence</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
+        <Footer />
       </Container>
     </Drawer>
   );
 };
 
 const style = StyleSheet.create({
-  header: {
-    // backgroundColor: '#2d678e',
-    color: '#FFFFFF',
-  },
   content: {
     backgroundColor: '#2d678e',
   },

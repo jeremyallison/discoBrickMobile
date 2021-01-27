@@ -1,0 +1,5 @@
+export const Pages = {
+  COLOR_PICKER: 'COLOR_PICKER',
+  PRESETS: 'PRESETS',
+  SEQUENCES: 'SEQUENCES',
+};

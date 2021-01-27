@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import {Card, CardItem, H2, Text, View} from 'native-base';
@@ -12,6 +12,7 @@ import {
   addStrip,
   removeStrip,
   setScanningState,
+  addAvailableStrip,
   clearAvailableStrips,
 } from '../store/actions';
 
@@ -19,8 +20,6 @@ const onConnect = (device) => {
   Bt.connectToDevice(device)
     .then(({device, characteristic}) => {
       MagicLightBt.sayHello(characteristic);
-
-      // Bt.stopScanning();
 
       store.dispatch(clearAvailableStrips());
       store.dispatch(setScanningState(false));
@@ -48,14 +47,26 @@ const onDisconnect = (_e, device) => {
   }
 };
 
-export const AvailableStripList = () => {
+export const AvailableStripList = (props) => {
+  useEffect(() => {
+    if (props.scan) {
+      store.dispatch(clearAvailableStrips());
+      store.dispatch(setScanningState(true));
+      Bt.scanForDevices((payload) =>
+        store.dispatch(addAvailableStrip(payload)),
+      );
+    } else {
+      Bt.stopScanning();
+    }
+  }, [props.scan]);
+
   const availableStrips = useSelector(({availableStrips}) => availableStrips);
   const connectedStrips = useSelector(({strips}) => strips);
 
   return (
     <>
       <View style={style.stripCategoryList}>
-        <H2 style={style.stripCategory}>Connected strips</H2>
+        <H2 style={style.stripCategory}>Connected bricks</H2>
         {connectedStrips.length ? (
           connectedStrips.map(({device}) => (
             <Card key={device.id} style={{alignItems: 'center', width: '100%'}}>
@@ -70,13 +81,13 @@ export const AvailableStripList = () => {
             </Card>
           ))
         ) : (
-          <Text style={style.placeholder}>No connected strip</Text>
+          <Text style={style.placeholder}>No brick connected</Text>
         )}
       </View>
 
       {availableStrips.length ? (
         <View style={style.stripCategoryList}>
-          <H2 style={style.stripCategory}>Available strips</H2>
+          <H2 style={style.stripCategory}>Available bricks</H2>
           {availableStrips.map((device) => (
             <Card key={device.id} style={{alignItems: 'center', width: '100%'}}>
               <CardItem button onPress={() => onConnect(device)}>
