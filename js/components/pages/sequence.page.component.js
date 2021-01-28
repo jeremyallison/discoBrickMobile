@@ -1,30 +1,31 @@
 import React from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {StyleSheet, Modal, Alert} from 'react-native';
-import {H2, Button, View, Text} from 'native-base';
+import {useSelector} from 'react-redux';
+import {StyleSheet, ScrollView} from 'react-native';
+import {H2, View} from 'native-base';
 
-import {ModalColorPicker} from '../../components/pickers/modalColorPicker.component';
 import {DisconnectedPlaceholder} from '../disconnected.component';
-import {setColorPickerModalVisible} from '../../store/actions';
+import {SequenceBuilder} from '../pickers/sequenceBuilder.component';
+import {ModalColorPicker} from '../../components/pickers/modalColorPicker.component';
 
 export const SequencePage = () => {
-  const dispatch = useDispatch();
   const strips = useSelector(({strips}) => strips);
+  const sequences = useSelector(({sequences}) => sequences);
 
-  const openModal = () => dispatch(setColorPickerModalVisible(true));
-  // !strips.length ?
-  return (
+  return strips.length ? (
     <>
-      <H2>Sequence page</H2>
-      <Button onPress={openModal}>
-        <Text>Open it</Text>
-      </Button>
+      <ScrollView>
+        {sequences.map((sequence, i) => (
+          <View key={i}>
+            <H2 style={style.h2}>{sequence.name}</H2>
+            <SequenceBuilder sequence={sequence} sequenceIndex={i} />
+          </View>
+        ))}
+      </ScrollView>
       <ModalColorPicker />
     </>
+  ) : (
+    <DisconnectedPlaceholder />
   );
-  // : (
-  //   <DisconnectedPlaceholder />
-  // );
 };
 
 const style = StyleSheet.create({

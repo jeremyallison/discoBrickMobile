@@ -3,25 +3,49 @@ import {useSelector, useDispatch} from 'react-redux';
 import {StyleSheet, Modal} from 'react-native';
 import {Button, View, Text} from 'native-base';
 
+import store from '../../store';
+import {
+  setColorPickerModalVisible,
+  setModalCurrentColor,
+  updateSequenceItemColor,
+} from '../../store/actions';
+
 import {ColorPicker} from './colorPicker.component';
-import {setColorPickerModalVisible} from '../../store/actions';
 
 export const ModalColorPicker = () => {
   const dispatch = useDispatch();
 
   const strips = useSelector(({strips}) => strips);
-  const visible = useSelector(
-    ({isColorPickerModalVisible}) => isColorPickerModalVisible,
+  const {visible, currentColor, target} = useSelector(
+    ({colorPickerModal}) => colorPickerModal,
   );
+
+  const colorChangeHandler = (color) => {
+    store.dispatch(setModalCurrentColor(color));
+  };
 
   return (
     <View style={style.centeredView}>
       <Modal transparent={true} animationType="slide" visible={visible}>
         <View style={style.centeredView}>
           <View style={style.modalView}>
-            <ColorPicker strips={strips} />
+            <ColorPicker
+              currentColor={currentColor}
+              strips={strips}
+              colorChangeHandler={colorChangeHandler}
+            />
 
-            <Button onPress={() => dispatch(setColorPickerModalVisible(false))}>
+            <Button
+              onPress={() => {
+                dispatch(
+                  updateSequenceItemColor(
+                    target.sequenceIndex,
+                    target.itemIndex,
+                    currentColor,
+                  ),
+                );
+                dispatch(setColorPickerModalVisible(false));
+              }}>
               <Text>Hide Modal</Text>
             </Button>
           </View>

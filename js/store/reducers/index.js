@@ -9,7 +9,11 @@ import {
   SET_CURRENT_COLOR,
   SET_ACTIVE_TAB,
   SET_COLOR_PICKER_MODAL_VISIBLE,
+  SET_COLOR_PICKER_MODAL_TARGET,
+  SET_COLOR_PICKER_MODAL_COLOR,
   SET_SELECTED_PRESET,
+  UPDATE_SEQUENCE,
+  UPDATE_SEQUENCE_ITEM_COLOR,
 } from '../actions';
 
 const initialState = {
@@ -18,8 +22,39 @@ const initialState = {
   scanning: false,
   currentColor: {r: 255, g: 255, b: 255},
   activeTab: Pages.COLOR_PICKER,
-  isColorPickerModalVisible: false,
+  colorPickerModal: {
+    visible: false,
+    currentColor: {r: 255, g: 255, b: 255},
+    target: null,
+  },
   selectedPreset: null,
+  sequences: [
+    {
+      name: 'Test sequence 1',
+      colors: [
+        {r: 255, g: 0, b: 0},
+        {r: 255, g: 255, b: 0},
+        {r: 0, g: 255, b: 0},
+        {r: 0, g: 255, b: 255},
+        {r: 0, g: 0, b: 255},
+        {r: 255, g: 0, b: 255},
+        {r: 255, g: 0, b: 0},
+        {r: 255, g: 255, b: 0},
+        {r: 0, g: 255, b: 0},
+        {r: 0, g: 255, b: 255},
+        {r: 0, g: 0, b: 255},
+        {r: 255, g: 0, b: 255},
+      ],
+    },
+    {
+      name: 'Test sequence 2',
+      colors: [
+        {r: 0, g: 0, b: 255},
+        {r: 0, g: 255, b: 0},
+        {r: 255, g: 0, b: 0},
+      ],
+    },
+  ],
 };
 
 function rootReducer(state = initialState, action) {
@@ -71,13 +106,63 @@ function rootReducer(state = initialState, action) {
     case SET_COLOR_PICKER_MODAL_VISIBLE:
       return {
         ...state,
-        isColorPickerModalVisible: action.payload,
+        colorPickerModal: {
+          ...state.colorPickerModal,
+          visible: action.payload,
+          target: action.payload ? state.colorPickerModal.target : null,
+        },
+      };
+
+    case SET_COLOR_PICKER_MODAL_TARGET:
+      return {
+        ...state,
+        colorPickerModal: {
+          ...state.colorPickerModal,
+          target: {
+            sequenceIndex: action.sequenceIndex,
+            itemIndex: action.itemIndex,
+          },
+        },
+      };
+
+    case SET_COLOR_PICKER_MODAL_COLOR:
+      return {
+        ...state,
+        colorPickerModal: {
+          ...state.colorPickerModal,
+          currentColor: action.payload,
+        },
       };
 
     case SET_SELECTED_PRESET:
       return {
         ...state,
         selectedPreset: action.payload,
+      };
+
+    case UPDATE_SEQUENCE:
+      return {
+        ...state,
+        sequences: state.sequences.map((s, i) =>
+          i === action.sequenceIndex ? {...s, colors: action.payload} : s,
+        ),
+      };
+
+    case UPDATE_SEQUENCE_ITEM_COLOR:
+      return {
+        ...state,
+        sequences: state.sequences.map((s, i) =>
+          i === action.sequenceIndex
+            ? {
+                ...s,
+                colors: state.sequences[
+                  action.sequenceIndex
+                ].colors.map((c, j) =>
+                  j === action.itemIndex ? action.color : c,
+                ),
+              }
+            : s,
+        ),
       };
   }
 

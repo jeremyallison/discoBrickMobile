@@ -40,7 +40,7 @@ const encapsulate = (parts) => new Uint8Array([].concat(parts.flat()));
 const buildColorPayload = (color) =>
   encapsulate([
     PayloadTemplates.COLOR.HEADER,
-    Object.values(color),
+    [color.r, color.g, color.b],
     PayloadTemplates.COLOR.FOOTER,
   ]);
 

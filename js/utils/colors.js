@@ -2,7 +2,7 @@ import convert from 'color-convert';
 
 export const hsv2rgb = (hsv) => {
   const rgb = convert.hsv.rgb(hsv.hue, hsv.sat * 100, hsv.val * 100);
-  return rgb;
+  return {r: rgb[0], g: rgb[1], b: rgb[2]};
 };
 export const rgb2hsv = (rgb) => {
   const hsv = convert.rgb.hsv(Object.values(rgb));
