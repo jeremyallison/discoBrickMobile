@@ -1,8 +1,9 @@
 import React, {useCallback} from 'react';
 import {useDispatch} from 'react-redux';
 import {TouchableOpacity} from 'react-native';
-import {View} from 'native-base';
+import {View, Button} from 'native-base';
 import DraggableFlatList from 'react-native-draggable-flatlist';
+import Icon from 'react-native-vector-icons/Feather';
 
 import {
   updateSequence,
@@ -10,6 +11,9 @@ import {
   setColorPickerModalVisible,
   setColorPickerModalTarget,
 } from '../../store/actions';
+import {hsv2rgb} from '../../utils/colors';
+import {ThemeStyles} from '../../theme';
+
 import {SequenceListItem} from '../sequenceListItem.component';
 
 export const SequenceBuilder = ({sequenceIndex, sequence}) => {
@@ -26,6 +30,17 @@ export const SequenceBuilder = ({sequenceIndex, sequence}) => {
 
   const onDragEnd = ({data}) => dispatch(updateSequence(sequenceIndex, data));
 
+  const addSequenceItem = () =>
+    sequence.colors.length <= 16 &&
+    dispatch(
+      updateSequence(
+        sequenceIndex,
+        sequence.colors.concat([
+          hsv2rgb({hue: Math.round(Math.random() * 360), sat: 1, val: 1}),
+        ]),
+      ),
+    );
+
   const renderItem = useCallback(
     ({item, index, drag, _isActive}) => {
       return (
@@ -40,13 +55,17 @@ export const SequenceBuilder = ({sequenceIndex, sequence}) => {
   );
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, flexDirection: 'row'}}>
+      <Button style={ThemeStyles.lightDotButton} onPress={addSequenceItem}>
+        <Icon size={15} style={ThemeStyles.lightDotIcon} name="plus" />
+      </Button>
       <DraggableFlatList
         horizontal
         data={sequence.colors}
         renderItem={renderItem}
         keyExtractor={(_item, index) => `draggable-item-${index}`}
         onDragEnd={onDragEnd}
+        showsHorizontalScrollIndicator={false}
       />
     </View>
   );

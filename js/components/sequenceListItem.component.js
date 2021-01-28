@@ -4,21 +4,18 @@ import {View} from 'native-base';
 
 export const SequenceListItem = ({color}) => (
   <View
-    style={{
-      ...styles.sequenceListItem,
-      backgroundColor: `rgb(${color.r}, ${color.g}, ${color.b})`,
-    }}
+    style={[
+      styles.sequenceListItem,
+      {backgroundColor: `rgb(${color.r}, ${color.g}, ${color.b})`},
+    ]}
   />
 );
 
 const styles = StyleSheet.create({
   sequenceListItem: {
-    width: 50,
-    height: 50,
+    height: 35,
+    width: 35,
+    borderRadius: 17,
     margin: 5,
-    borderRadius: 10,
-    borderStyle: 'solid',
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: '#ffffff',
   },
 });

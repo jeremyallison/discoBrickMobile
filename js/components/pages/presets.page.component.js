@@ -9,7 +9,7 @@ import {DisconnectedPlaceholder} from '../disconnected.component';
 
 import {setSelectedPreset} from '../../store/actions';
 import {Presets, MagicLightBt} from '../../utils/magicLightBt';
-import {ThemeColors} from '../../utils/colors';
+import {ThemeColors, ThemeStyles} from '../../theme';
 
 const iconsPerType = {
   fade: 'feather',
@@ -42,7 +42,7 @@ export const PresetsPage = () => {
               justifyContent: 'center',
               alignContent: 'center',
             }}>
-            <H2 style={styles.h2}>Choose a funky preset</H2>
+            <H2 style={ThemeStyles.h2}>Choose a funky preset</H2>
             {Presets.map(({name, type, code, color}) => (
               <Button
                 key={name}
@@ -82,18 +82,13 @@ export const PresetsPage = () => {
 };
 
 const styles = StyleSheet.create({
-  h2: {
-    color: '#fff',
-    fontSize: 25,
-    marginBottom: 30,
-  },
   selectedPresetButton: {
     borderStyle: 'solid',
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#fff',
     width: 170,
     height: 60,
-    backgroundColor: ThemeColors.highlight,
+    backgroundColor: '#fff',
     margin: 5,
     justifyContent: 'flex-start',
   },
@@ -102,8 +97,8 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     width: 170,
     height: 60,
-    backgroundColor: '#FFFFFF',
-    borderColor: '#FFFFFF',
+    backgroundColor: 'transparent',
+    borderColor: '#fff',
     margin: 5,
     justifyContent: 'flex-start',
   },
@@ -114,11 +109,11 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   selectedPresetText: {
-    color: '#FFFFFF',
+    color: ThemeColors.highlight,
     marginLeft: -10,
   },
   presetText: {
-    color: '#000000',
+    color: '#fff',
     marginLeft: -10,
   },
 });
