@@ -10,8 +10,12 @@ export const SET_COLOR_PICKER_MODAL_VISIBLE = 'SET_COLOR_PICKER_MODAL_VISIBLE';
 export const SET_COLOR_PICKER_MODAL_TARGET = 'SET_COLOR_PICKER_MODAL_TARGET';
 export const SET_COLOR_PICKER_MODAL_COLOR = 'SET_COLOR_PICKER_MODAL_COLOR';
 export const SET_SELECTED_PRESET = 'SET_SELECTED_PRESET';
-export const UPDATE_SEQUENCE = 'SET_SEQUENCE';
-export const UPDATE_SEQUENCE_ITEM_COLOR = 'SET_SEQUENCE_ITEM_COLOR';
+export const ADD_SEQUENCE = 'ADD_SEQUENCE';
+export const UPDATE_SEQUENCE = 'UPDATE_SEQUENCE';
+export const UPDATE_SEQUENCE_NAME = 'UPDATE_SEQUENCE_NAME';
+export const DELETE_SEQUENCE = 'DELETE_SEQUENCE';
+export const UPDATE_SEQUENCE_ITEM_COLOR = 'UPDATE_SEQUENCE_ITEM_COLOR';
+export const DELETE_SEQUENCE_ITEM = 'DELETE_SEQUENCE_ITEM';
 
 export const addStrip = (payload) => {
   return {type: ADD_STRIP, payload};
@@ -61,10 +65,26 @@ export const setSelectedPreset = (payload) => {
   return {type: SET_SELECTED_PRESET, payload};
 };
 
+export const addSequence = () => {
+  return {type: ADD_SEQUENCE};
+};
+
 export const updateSequence = (sequenceIndex, payload) => {
   return {type: UPDATE_SEQUENCE, sequenceIndex, payload};
 };
 
+export const updateSequenceName = (sequenceIndex, payload) => {
+  return {type: UPDATE_SEQUENCE_NAME, sequenceIndex, payload};
+};
+
+export const deleteSequence = (sequenceIndex) => {
+  return {type: DELETE_SEQUENCE, sequenceIndex};
+};
+
 export const updateSequenceItemColor = (sequenceIndex, itemIndex, color) => {
   return {type: UPDATE_SEQUENCE_ITEM_COLOR, sequenceIndex, itemIndex, color};
+};
+
+export const deleteSequenceItem = (sequenceIndex, itemIndex) => {
+  return {type: DELETE_SEQUENCE_ITEM, sequenceIndex, itemIndex};
 };

@@ -12,12 +12,17 @@ import {
   SET_COLOR_PICKER_MODAL_TARGET,
   SET_COLOR_PICKER_MODAL_COLOR,
   SET_SELECTED_PRESET,
+  ADD_SEQUENCE,
   UPDATE_SEQUENCE,
+  UPDATE_SEQUENCE_NAME,
+  DELETE_SEQUENCE,
   UPDATE_SEQUENCE_ITEM_COLOR,
+  DELETE_SEQUENCE_ITEM,
 } from '../actions';
 
 const initialState = {
   availableStrips: [],
+  // strips: [{device: {id: 'mock'}}],
   strips: [],
   scanning: false,
   currentColor: {r: 255, g: 255, b: 255},
@@ -140,11 +145,35 @@ function rootReducer(state = initialState, action) {
         selectedPreset: action.payload,
       };
 
+    case ADD_SEQUENCE:
+      return {
+        ...state,
+        sequences: state.sequences.concat([
+          {name: `New sequence ${state.sequences.length + 1}`, colors: []},
+        ]),
+      };
+
     case UPDATE_SEQUENCE:
       return {
         ...state,
         sequences: state.sequences.map((s, i) =>
           i === action.sequenceIndex ? {...s, colors: action.payload} : s,
+        ),
+      };
+
+    case UPDATE_SEQUENCE_NAME:
+      return {
+        ...state,
+        sequences: state.sequences.map((s, i) =>
+          i === action.sequenceIndex ? {...s, name: action.payload} : s,
+        ),
+      };
+
+    case DELETE_SEQUENCE:
+      return {
+        ...state,
+        sequences: state.sequences.filter(
+          (_s, i) => i !== action.sequenceIndex,
         ),
       };
 
@@ -159,6 +188,21 @@ function rootReducer(state = initialState, action) {
                   action.sequenceIndex
                 ].colors.map((c, j) =>
                   j === action.itemIndex ? action.color : c,
+                ),
+              }
+            : s,
+        ),
+      };
+
+    case DELETE_SEQUENCE_ITEM:
+      return {
+        ...state,
+        sequences: state.sequences.map((s, i) =>
+          i === action.sequenceIndex
+            ? {
+                ...s,
+                colors: state.sequences[action.sequenceIndex].colors.filter(
+                  (_c, j) => j !== action.itemIndex,
                 ),
               }
             : s,
