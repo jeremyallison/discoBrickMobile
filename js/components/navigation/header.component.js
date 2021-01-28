@@ -3,7 +3,7 @@ import {StyleSheet, Image} from 'react-native';
 import {Body, Button, Left, Right, Header as NBHeader} from 'native-base';
 import Icon from 'react-native-vector-icons/Feather';
 
-import {ThemeColors} from '../utils/colors';
+import {ThemeColors} from '../../theme';
 
 export const Header = ({openDrawerHandler}) => {
   return (
@@ -15,7 +15,7 @@ export const Header = ({openDrawerHandler}) => {
       </Left>
       <Body>
         <Image
-          source={require('../../assets/images/discobrick-header-logo.png')}
+          source={require('../../../assets/images/discobrick-header-logo.png')}
           style={styles.headerLogo}
         />
       </Body>
@@ -26,7 +26,7 @@ export const Header = ({openDrawerHandler}) => {
 
 const styles = StyleSheet.create({
   header: {
-    color: '#FFFFFF',
+    color: '#fff',
   },
   headerLogo: {
     height: 50,

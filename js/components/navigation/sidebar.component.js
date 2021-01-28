@@ -2,13 +2,13 @@ import React from 'react';
 import {StyleSheet, Image} from 'react-native';
 import {View} from 'native-base';
 
-import {AvailableStripList} from './availableStripList.component';
+import {AvailableStripList} from '../availableStripList.component';
 
 export const Sidebar = ({isDrawerOpen}) => {
   return (
     <View style={styles.sidebar}>
       <Image
-        source={require('../../assets/images/app-menu-header.jpg')}
+        source={require('../../../assets/images/app-menu-header.jpg')}
         style={styles.header}
       />
       <AvailableStripList scan={isDrawerOpen} />

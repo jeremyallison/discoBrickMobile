@@ -7,9 +7,9 @@ import {ColorPickerPage} from './components/pages/colorPicker.page.component';
 import {PresetsPage} from './components/pages/presets.page.component';
 import {SequencePage} from './components/pages/sequence.page.component';
 
-import {Header} from './components/header.component';
-import {Sidebar} from './components/sidebar.component';
-import {Footer} from './components/footer.component';
+import {Header} from './components/navigation/header.component';
+import {Sidebar} from './components/navigation/sidebar.component';
+import {Footer} from './components/navigation/footer.component';
 
 import {Pages} from './components/pages/pages.constants';
 

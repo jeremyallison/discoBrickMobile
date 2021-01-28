@@ -3,9 +3,9 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Footer as NBFooter, FooterTab, Button, Text} from 'native-base';
 import Icon from 'react-native-vector-icons/Feather';
 
-import {Pages} from './pages/pages.constants';
-import {setActiveTab} from '../store/actions';
-import {ThemeColors} from '../utils/colors';
+import {Pages} from '../pages/pages.constants';
+import {setActiveTab} from '../../store/actions';
+import {ThemeColors} from '../../theme';
 
 export const Footer = () => {
   const activeTab = useSelector(({activeTab}) => activeTab);
@@ -25,7 +25,7 @@ export const Footer = () => {
             color={
               activeTab === Pages.COLOR_PICKER
                 ? ThemeColors.highlight
-                : ThemeColors.inactive
+                : ThemeColors.neutralGrey
             }
             style={{marginBottom: 5}}
           />
@@ -34,7 +34,7 @@ export const Footer = () => {
               color:
                 activeTab === Pages.COLOR_PICKER
                   ? ThemeColors.highlight
-                  : ThemeColors.inactive,
+                  : ThemeColors.neutralGrey,
             }}>
             Single color
           </Text>
@@ -49,7 +49,7 @@ export const Footer = () => {
             color={
               activeTab === Pages.PRESETS
                 ? ThemeColors.highlight
-                : ThemeColors.inactive
+                : ThemeColors.neutralGrey
             }
             style={{marginBottom: 5}}
           />
@@ -58,7 +58,7 @@ export const Footer = () => {
               color:
                 activeTab === Pages.PRESETS
                   ? ThemeColors.highlight
-                  : ThemeColors.inactive,
+                  : ThemeColors.neutralGrey,
             }}>
             Presets
           </Text>
@@ -73,7 +73,7 @@ export const Footer = () => {
             color={
               activeTab === Pages.SEQUENCES
                 ? ThemeColors.highlight
-                : ThemeColors.inactive
+                : ThemeColors.neutralGrey
             }
             style={{marginBottom: 5}}
           />
@@ -82,7 +82,7 @@ export const Footer = () => {
               color:
                 activeTab === Pages.SEQUENCES
                   ? ThemeColors.highlight
-                  : ThemeColors.inactive,
+                  : ThemeColors.neutralGrey,
             }}>
             Sequence
           </Text>
