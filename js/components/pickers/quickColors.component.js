@@ -13,13 +13,13 @@ const QUICK_COLOR_CODES = [
 ];
 
 export const QuickColors = ({currentColor, colorChangeHandler}) => (
-  <View style={style.quickColorsContainer}>
+  <View style={styles.quickColorsContainer}>
     {QUICK_COLOR_CODES.map((color, i) => (
       <Button
         key={`quick-color-${i}`}
         style={{
-          ...style.colorButton,
-          ...(currentColor === color ? style.colorButtonActive : {}),
+          ...styles.colorButton,
+          ...(currentColor === color ? styles.colorButtonActive : {}),
           backgroundColor: `rgb(${color.r}, ${color.g}, ${color.b})`,
         }}
         onPress={() => colorChangeHandler(color)}
@@ -28,7 +28,7 @@ export const QuickColors = ({currentColor, colorChangeHandler}) => (
   </View>
 );
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   quickColorsContainer: {
     flexDirection: 'row',
     marginTop: 10,

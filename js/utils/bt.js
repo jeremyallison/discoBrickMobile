@@ -54,9 +54,9 @@ export class Bt {
 
   static async connectAndGetCharacteristic(device) {
     await device.connect();
-    const services = await device.discoverAllServicesAndCharacteristics();
+    await device.discoverAllServicesAndCharacteristics();
 
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve) => {
       await device
         .services()
         .then(async (services) => {

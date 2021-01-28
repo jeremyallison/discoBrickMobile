@@ -1,6 +1,5 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {StyleSheet} from 'react-native';
 import {Footer as NBFooter, FooterTab, Button, Text} from 'native-base';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -92,5 +91,3 @@ export const Footer = () => {
     </NBFooter>
   );
 };
-
-const style = StyleSheet.create({});

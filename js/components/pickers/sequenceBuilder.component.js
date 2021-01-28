@@ -15,23 +15,29 @@ import {SequenceListItem} from '../sequenceListItem.component';
 export const SequenceBuilder = ({sequenceIndex, sequence}) => {
   const dispatch = useDispatch();
 
-  const openModal = (itemIndex, item) => {
-    dispatch(setModalCurrentColor(item));
-    dispatch(setColorPickerModalVisible(true));
-    dispatch(setColorPickerModalTarget(sequenceIndex, itemIndex));
-  };
+  const openModal = useCallback(
+    (itemIndex, item) => {
+      dispatch(setModalCurrentColor(item));
+      dispatch(setColorPickerModalVisible(true));
+      dispatch(setColorPickerModalTarget(sequenceIndex, itemIndex));
+    },
+    [dispatch, sequenceIndex],
+  );
 
   const onDragEnd = ({data}) => dispatch(updateSequence(sequenceIndex, data));
 
-  const renderItem = useCallback(({item, index, drag, isActive}) => {
-    return (
-      <TouchableOpacity
-        onLongPress={drag}
-        onPress={() => openModal(index, item)}>
-        <SequenceListItem color={item} />
-      </TouchableOpacity>
-    );
-  }, []);
+  const renderItem = useCallback(
+    ({item, index, drag, _isActive}) => {
+      return (
+        <TouchableOpacity
+          onLongPress={drag}
+          onPress={() => openModal(index, item)}>
+          <SequenceListItem color={item} />
+        </TouchableOpacity>
+      );
+    },
+    [openModal],
+  );
 
   return (
     <View style={{flex: 1}}>

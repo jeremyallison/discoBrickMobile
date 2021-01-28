@@ -32,12 +32,12 @@ export const ColorPickerPage = () => {
         <Grid>
           <Row
             style={{flexDirection: 'column', alignItems: 'center', margin: 10}}>
-            <H2 style={style.h2}>Find your shade...</H2>
+            <H2 style={styles.h2}>Find your shade...</H2>
             <ColorPicker
               currentColor={currentColor}
               colorChangeHandler={colorChangeHandler}
             />
-            <H2 style={style.h2}>...or quick pick a color</H2>
+            <H2 style={styles.h2}>...or quick pick a color</H2>
             <QuickColors
               currentColor={currentColor}
               colorChangeHandler={colorChangeHandler}
@@ -51,7 +51,7 @@ export const ColorPickerPage = () => {
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   h2: {
     color: '#fff',
     fontSize: 25,

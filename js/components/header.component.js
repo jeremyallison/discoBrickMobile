@@ -7,7 +7,7 @@ import {ThemeColors} from '../utils/colors';
 
 export const Header = ({openDrawerHandler}) => {
   return (
-    <NBHeader style={style.header}>
+    <NBHeader style={styles.header}>
       <Left>
         <Button transparent onPress={openDrawerHandler}>
           <Icon size={30} color={ThemeColors.highlight} name="menu" />
@@ -16,7 +16,7 @@ export const Header = ({openDrawerHandler}) => {
       <Body>
         <Image
           source={require('../../assets/images/discobrick-header-logo.png')}
-          style={style.headerLogo}
+          style={styles.headerLogo}
         />
       </Body>
       <Right />
@@ -24,7 +24,7 @@ export const Header = ({openDrawerHandler}) => {
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   header: {
     color: '#FFFFFF',
   },

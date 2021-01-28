@@ -39,7 +39,11 @@ const onDisconnect = (_e, device) => {
 
   const {strips} = store.getState();
 
-  const strip = strips && strips.find((strip) => strip.device.id == device.id);
+  const strip =
+    strips &&
+    strips.find(
+      (strip) => parseInt(strip.device.id, 10) === parseInt(device.id, 10),
+    );
 
   if (strip) {
     strip.disconnectSubscription.remove();
@@ -65,8 +69,8 @@ export const AvailableStripList = (props) => {
 
   return (
     <>
-      <View style={style.stripCategoryList}>
-        <H2 style={style.stripCategory}>Connected bricks</H2>
+      <View style={styles.stripCategoryList}>
+        <H2 style={styles.stripCategory}>Connected bricks</H2>
         {connectedStrips.length ? (
           connectedStrips.map(({device}) => (
             <Card key={device.id} style={{alignItems: 'center', width: '100%'}}>
@@ -81,13 +85,13 @@ export const AvailableStripList = (props) => {
             </Card>
           ))
         ) : (
-          <Text style={style.placeholder}>No brick connected</Text>
+          <Text style={styles.placeholder}>No brick connected</Text>
         )}
       </View>
 
       {availableStrips.length ? (
-        <View style={style.stripCategoryList}>
-          <H2 style={style.stripCategory}>Available bricks</H2>
+        <View style={styles.stripCategoryList}>
+          <H2 style={styles.stripCategory}>Available bricks</H2>
           {availableStrips.map((device) => (
             <Card key={device.id} style={{alignItems: 'center', width: '100%'}}>
               <CardItem button onPress={() => onConnect(device)}>
@@ -106,7 +110,7 @@ export const AvailableStripList = (props) => {
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   stripCategory: {
     marginTop: 20,
   },

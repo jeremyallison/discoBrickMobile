@@ -4,12 +4,12 @@ import {H1, H3} from 'native-base';
 
 export const DisconnectedPlaceholder = () => (
   <>
-    <H1 style={style.h1}>Nothing connected yet</H1>
-    <H3 style={style.h3}>Open the menu and turn on your DiscoBrick!</H3>
+    <H1 style={styles.h1}>Nothing connected yet</H1>
+    <H3 style={styles.h3}>Open the menu and turn on your DiscoBrick!</H3>
   </>
 );
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   h1: {
     color: '#fff',
     fontSize: 30,

@@ -56,7 +56,7 @@ export const Layout = () => {
         <Header openDrawerHandler={openDrawer} />
         <Content
           contentContainerStyle={{flex: 1, justifyContent: 'center'}}
-          style={style.content}
+          style={styles.content}
           scrollEnabled={false}>
           {Tab}
         </Content>
@@ -66,7 +66,7 @@ export const Layout = () => {
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   content: {
     backgroundColor: '#2d678e',
   },

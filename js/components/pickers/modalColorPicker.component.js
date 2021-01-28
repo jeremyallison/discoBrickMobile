@@ -25,10 +25,10 @@ export const ModalColorPicker = () => {
   };
 
   return (
-    <View style={style.centeredView}>
+    <View style={styles.centeredView}>
       <Modal transparent={true} animationType="slide" visible={visible}>
-        <View style={style.centeredView}>
-          <View style={style.modalView}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
             <ColorPicker
               currentColor={currentColor}
               strips={strips}
@@ -55,7 +55,7 @@ export const ModalColorPicker = () => {
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: 'center',

@@ -6,17 +6,17 @@ import {AvailableStripList} from './availableStripList.component';
 
 export const Sidebar = ({isDrawerOpen}) => {
   return (
-    <View style={style.sidebar}>
+    <View style={styles.sidebar}>
       <Image
         source={require('../../assets/images/app-menu-header.jpg')}
-        style={style.header}
+        style={styles.header}
       />
       <AvailableStripList scan={isDrawerOpen} />
     </View>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   sidebar: {
     flexDirection: 'column',
     height: '100%',
