@@ -2,12 +2,14 @@ import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {StyleSheet, Modal} from 'react-native';
 import {Button, View, Text} from 'native-base';
+import Icon from 'react-native-vector-icons/Feather';
 
 import store from '../../store';
 import {
   setColorPickerModalVisible,
   setModalCurrentColor,
   updateSequenceItemColor,
+  deleteSequenceItem,
 } from '../../store/actions';
 
 import {ColorPicker} from './colorPicker.component';
@@ -34,20 +36,39 @@ export const ModalColorPicker = () => {
               strips={strips}
               colorChangeHandler={colorChangeHandler}
             />
-
-            <Button
-              onPress={() => {
-                dispatch(
-                  updateSequenceItemColor(
-                    target.sequenceIndex,
-                    target.itemIndex,
-                    currentColor,
-                  ),
-                );
-                dispatch(setColorPickerModalVisible(false));
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
               }}>
-              <Text>Hide Modal</Text>
-            </Button>
+              <Button
+                danger
+                onPress={() => {
+                  dispatch(
+                    deleteSequenceItem(target.sequenceIndex, target.itemIndex),
+                  );
+                  dispatch(setColorPickerModalVisible(false));
+                }}>
+                <Icon
+                  name="trash"
+                  size={20}
+                  style={{marginLeft: 15, marginRight: 15, color: '#fff'}}
+                />
+              </Button>
+              <Button
+                onPress={() => {
+                  dispatch(
+                    updateSequenceItemColor(
+                      target.sequenceIndex,
+                      target.itemIndex,
+                      currentColor,
+                    ),
+                  );
+                  dispatch(setColorPickerModalVisible(false));
+                }}>
+                <Text>Save color</Text>
+              </Button>
+            </View>
           </View>
         </View>
       </Modal>
@@ -59,15 +80,17 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
     marginTop: 22,
   },
   modalView: {
     margin: 20,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
+    padding: 10,
+    paddingBottom: 15,
+    // alignItems: 'center',
+    // justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

@@ -17,11 +17,11 @@ export const QuickColors = ({currentColor, colorChangeHandler}) => (
     {QUICK_COLOR_CODES.map((color, i) => (
       <Button
         key={`quick-color-${i}`}
-        style={{
-          ...styles.colorButton,
-          ...(currentColor === color ? styles.colorButtonActive : {}),
-          backgroundColor: `rgb(${color.r}, ${color.g}, ${color.b})`,
-        }}
+        style={[
+          styles.colorButton,
+          currentColor === color && styles.colorButtonActive,
+          {backgroundColor: `rgb(${color.r}, ${color.g}, ${color.b})`},
+        ]}
         onPress={() => colorChangeHandler(color)}
       />
     ))}
@@ -41,6 +41,6 @@ const styles = StyleSheet.create({
   },
   colorButtonActive: {
     borderWidth: 3,
-    borderColor: '#ffffff',
+    borderColor: '#fff',
   },
 });

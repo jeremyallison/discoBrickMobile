@@ -22,9 +22,9 @@ export const ColorPicker = ({currentColor, colorChangeHandler}) => {
       <HsvColorPicker
         huePickerBorderRadius={10}
         huePickerBarWidth={30}
-        huePickerBarHeight={280}
+        huePickerBarHeight={260}
         huePickerSliderSize={35}
-        satValPickerSize={280}
+        satValPickerSize={260}
         huePickerHue={hsv.hue}
         onHuePickerDragMove={onHuePickerChange}
         onHuePickerPress={onHuePickerChange}
@@ -35,6 +35,7 @@ export const ColorPicker = ({currentColor, colorChangeHandler}) => {
         satValPickerValue={hsv.val}
         onSatValPickerDragMove={onSatValPickerChange}
         onSatValPickerPress={onSatValPickerChange}
+        containerStyle={{marginLeft: -5, marginRight: 10, marginTop: -5}}
       />
     </View>
   );
