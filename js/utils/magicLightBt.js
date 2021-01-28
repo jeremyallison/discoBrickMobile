@@ -109,15 +109,9 @@ export class MagicLightBt {
       }
 
       // Pad to make complete 16 color sequence
-      Array.prototype.push.apply(
-        colors,
-        new Array(16 - colors.length).fill({r: 1, g: 2, b: 3}),
-      );
-
-      const payloadColors = colors.reduce(
-        (acc, color) => acc.concat(color.r, color.g, color.b),
-        [],
-      );
+      const payloadColors = colors
+        .concat(new Array(16 - colors.length).fill({r: 1, g: 2, b: 3}))
+        .reduce((acc, color) => acc.concat(color.r, color.g, color.b), []);
 
       res = this.writeMessage(
         buildSequencePayload(payloadColors, speed, mode),
