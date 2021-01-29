@@ -9,7 +9,7 @@ import {DisconnectedPlaceholder} from '../disconnected.component';
 
 import {setCurrentPreset, setCurrentPresetSpeed} from '../../store/actions';
 import {Presets as Ps, MagicLightBt} from '../../utils/magicLightBt';
-import {ThemeColors, ThemeStyles} from '../../theme';
+import {ThemeStyles} from '../../theme';
 import {SpeedSlider} from '../pickers/speedSlider.component';
 
 const iconsPerType = {
@@ -124,8 +124,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#fff',
     width: 170,
-    height: 60,
-    backgroundColor: '#fff',
+    height: 50,
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
     margin: 5,
     justifyContent: 'flex-start',
   },
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   currentPresetText: {
-    color: ThemeColors.highlight,
+    color: '#000',
     marginLeft: -10,
   },
   presetText: {
