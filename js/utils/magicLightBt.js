@@ -6,22 +6,22 @@ const TURN_ON = new Uint8Array([0xcc, 0x23, 0x33]);
 
 const TURN_OFF = new Uint8Array([0xcc, 0x24, 0x33]);
 
-export const Presets = [
-  {name: 'Séquence multi', type: 'cut', code: 0x38, color: '#000000'},
-  {name: 'Fondu multi', type: 'fade', code: 0x25, color: '#000000'},
-  {name: 'Fondu rouge', type: 'throb', code: 0x26, color: '#FF0000'},
-  {name: 'Fondu vert', type: 'throb', code: 0x27, color: '#00FF00'},
-  {name: 'Fondu bleu', type: 'throb', code: 0x28, color: '#0000FF'},
-  {name: 'Fondu jaune', type: 'throb', code: 0x29, color: '#FFFF00'},
-  {name: 'Éclairs multi', type: 'strobe', code: 0x30, color: '#000000'},
-  {name: 'Éclairs rouge', type: 'strobe', code: 0x31, color: '#FF0000'},
-  {name: 'Éclairs vert', type: 'strobe', code: 0x32, color: '#00FF00'},
-  {name: 'Éclairs bleu', type: 'strobe', code: 0x33, color: '#0000FF'},
-  {name: 'Éclairs jaune', type: 'strobe', code: 0x34, color: '#FFFF00'},
-  {name: 'Éclairs cyan', type: 'strobe', code: 0x35, color: '#00FFFF'},
-  {name: 'Éclairs violet', type: 'strobe', code: 0x36, color: '#FF00FF'},
-  {name: 'Éclairs blanc', type: 'strobe', code: 0x37, color: '#000000'},
-];
+export const Presets = {
+  CUT_SEVEN: 0x38,
+  FADE_SEVEN: 0x25,
+  THROB_RED: 0x26,
+  THROB_GREEN: 0x27,
+  THROB_BLUE: 0x28,
+  THROB_YELLOW: 0x29,
+  STROBE_SEVEN: 0x30,
+  STROBE_RED: 0x31,
+  STROBE_GREEN: 0x32,
+  STROBE_BLUE: 0x33,
+  STROBE_YELLOW: 0x34,
+  STROBE_CYAN: 0x35,
+  STROBE_PURPLE: 0x36,
+  STROBE_WHITE: 0x37,
+};
 
 export const SequenceModes = {
   FADE: 0x3a,

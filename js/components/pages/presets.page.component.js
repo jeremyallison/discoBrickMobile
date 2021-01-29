@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import {DisconnectedPlaceholder} from '../disconnected.component';
 
 import {setSelectedPreset} from '../../store/actions';
-import {Presets, MagicLightBt} from '../../utils/magicLightBt';
+import {Presets as Ps, MagicLightBt} from '../../utils/magicLightBt';
 import {ThemeColors, ThemeStyles} from '../../theme';
 
 const iconsPerType = {
@@ -16,6 +16,27 @@ const iconsPerType = {
   throb: 'feather',
   strobe: 'zap',
   cut: 'grid',
+};
+
+const presetDetails = {
+  [Ps.CUT_SEVEN]: {name: 'Séquence multi', type: 'cut', color: '#fff'},
+  [Ps.FADE_SEVEN]: {name: 'Fondu multi', type: 'fade', color: '#fff'},
+  [Ps.THROB_RED]: {name: 'Fondu rouge', type: 'throb', color: '#FF0000'},
+  [Ps.THROB_GREEN]: {name: 'Fondu vert', type: 'throb', color: '#00FF00'},
+  [Ps.THROB_BLUE]: {name: 'Fondu bleu', type: 'throb', color: '#0000FF'},
+  [Ps.THROB_YELLOW]: {name: 'Fondu jaune', type: 'throb', color: '#FFFF00'},
+  [Ps.STROBE_SEVEN]: {name: 'Éclairs multi', type: 'strobe', color: '#fff'},
+  [Ps.STROBE_RED]: {name: 'Éclairs rouge', type: 'strobe', color: '#FF0000'},
+  [Ps.STROBE_GREEN]: {name: 'Éclairs vert', type: 'strobe', color: '#00FF00'},
+  [Ps.STROBE_BLUE]: {name: 'Éclairs bleu', type: 'strobe', color: '#0000FF'},
+  [Ps.STROBE_YELLOW]: {name: 'Éclairs jaune', type: 'strobe', color: '#FFFF00'},
+  [Ps.STROBE_CYAN]: {name: 'Éclairs cyan', type: 'strobe', color: '#00FFFF'},
+  [Ps.STROBE_PURPLE]: {
+    name: 'Éclairs violet',
+    type: 'strobe',
+    color: '#FF00FF',
+  },
+  [Ps.STROBE_WHITE]: {name: 'Éclairs blanc', type: 'strobe', color: '#fff'},
 };
 
 export const PresetsPage = () => {
@@ -42,36 +63,41 @@ export const PresetsPage = () => {
               justifyContent: 'center',
               alignContent: 'center',
             }}>
-            <H2 style={ThemeStyles.h2}>Choose a funky preset</H2>
-            {Presets.map(({name, type, code, color}) => (
-              <Button
-                key={name}
-                onPress={() => sendPreset(code)}
-                style={
-                  selectedPreset === code
-                    ? styles.selectedPresetButton
-                    : styles.presetButton
-                }>
-                <Icon
-                  size={25}
-                  name={iconsPerType[type]}
-                  color={color}
+            <H2 style={[ThemeStyles.h2, ThemeStyles.centeredTitle]}>
+              Choose a funky preset
+            </H2>
+            {Object.keys(Ps).map((psKey) => {
+              const {name, type, color} = presetDetails[Ps[psKey]];
+              return (
+                <Button
+                  key={name}
+                  onPress={() => sendPreset(Ps[psKey])}
                   style={
-                    selectedPreset === code
-                      ? styles.selectedPresetIcon
-                      : styles.presetIcon
-                  }
-                />
-                <Text
-                  style={
-                    selectedPreset === code
-                      ? styles.selectedPresetText
-                      : styles.presetText
+                    selectedPreset === Ps[psKey]
+                      ? styles.selectedPresetButton
+                      : styles.presetButton
                   }>
-                  {name}
-                </Text>
-              </Button>
-            ))}
+                  <Icon
+                    size={25}
+                    name={iconsPerType[type]}
+                    color={color}
+                    style={
+                      selectedPreset === Ps[psKey]
+                        ? styles.selectedPresetIcon
+                        : styles.presetIcon
+                    }
+                  />
+                  <Text
+                    style={
+                      selectedPreset === Ps[psKey]
+                        ? styles.selectedPresetText
+                        : styles.presetText
+                    }>
+                    {name}
+                  </Text>
+                </Button>
+              );
+            })}
           </Row>
         </Grid>
       ) : (
