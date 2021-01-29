@@ -107,7 +107,7 @@ export const PresetsPage = () => {
               );
             })}
           </Row>
-          <Row size={0.2}>
+          <Row size={0.2} style={{paddingLeft: 10, paddingRight: 10}}>
             <SpeedSlider value={speed} onSpeedSelect={setSpeed} />
           </Row>
         </Grid>

@@ -75,13 +75,17 @@ export const SequencePage = () => {
 
   return strips.length ? (
     <>
+      <Segment style={{margin: 10}}>{segmentButtons}</Segment>
+      <SpeedSlider
+        value={speed}
+        onSpeedSelect={setSpeed}
+        style={{margin: 10}}
+      />
       <ScrollView style={{padding: 10}}>
-        <Segment>{segmentButtons}</Segment>
-        <SpeedSlider value={speed} onSpeedSelect={setSpeed} />
         {sequences.map((sequence, i) => (
           <View key={i}>
             <View style={styles.sequenceContainer}>
-              <H2 style={ThemeStyles.h2}>{sequence.name}</H2>
+              <H2 style={[ThemeStyles.h2, {flex: 1}]}>{sequence.name}</H2>
               <DotButton
                 onPress={() => handleDeleteSequence(i)}
                 iconName="trash-can-outline"
