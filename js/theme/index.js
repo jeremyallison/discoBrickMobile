@@ -13,7 +13,7 @@ const CommonStyle = {
     margin: 5,
     padding: 7,
     backgroundColor: 'transparent',
-    borderWidth: StyleSheet.hairlineWidth,
+    borderWidth: 1,
     borderColor: '#fff',
   },
   pillDotIcon: {
@@ -29,15 +29,20 @@ export const ThemeStyles = StyleSheet.create({
   },
   h2: {
     color: '#fff',
-    fontSize: 20,
+    // fontWeight: 'bold',
+    fontSize: 24,
     marginTop: 10,
     marginBottom: 10,
   },
   h3: {
-    color: '#222',
+    color: '#888',
     fontSize: 20,
     marginTop: 10,
     alignSelf: 'center',
+  },
+  centeredTitle: {
+    width: '100%',
+    textAlign: 'center',
   },
   lightDotButton: {
     ...CommonStyle.pillDotButton,

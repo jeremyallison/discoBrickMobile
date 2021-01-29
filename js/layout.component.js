@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {useSelector} from 'react-redux';
-import {StyleSheet} from 'react-native';
+import {ImageBackground, StyleSheet} from 'react-native';
 import {Drawer, Content, Container} from 'native-base';
 
 import {ColorPickerPage} from './components/pages/colorPicker.page.component';
@@ -54,11 +54,12 @@ export const Layout = () => {
       onClose={closeDrawer}>
       <Container>
         <Header openDrawerHandler={openDrawer} />
-        <Content
-          contentContainerStyle={{flex: 1, justifyContent: 'center'}}
-          style={styles.content}
-          scrollEnabled={false}>
-          {Tab}
+        <Content contentContainerStyle={styles.content} scrollEnabled={false}>
+          <ImageBackground
+            source={require('../assets/images/app-background.jpg')}
+            style={styles.imageBackground}>
+            {Tab}
+          </ImageBackground>
         </Content>
         <Footer />
       </Container>
@@ -69,5 +70,12 @@ export const Layout = () => {
 const styles = StyleSheet.create({
   content: {
     backgroundColor: '#2d678e',
+    flex: 1,
+    justifyContent: 'center',
+  },
+  imageBackground: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 });
