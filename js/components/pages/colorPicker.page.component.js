@@ -13,7 +13,7 @@ import {ColorPicker} from '../pickers/colorPicker.component';
 import {QuickColors} from '../pickers/quickColors.component';
 
 import {DisconnectedPlaceholder} from '../disconnected.component';
-import { DotButton } from '../buttons.component';
+import {DotButton} from '../buttons.component';
 
 export const ColorPickerPage = () => {
   const strips = useSelector(({strips}) => strips);
@@ -31,8 +31,17 @@ export const ColorPickerPage = () => {
     <>
       {strips.length ? (
         <Grid>
-          <Row>
-            <DotButton big iconName='play' />
+          <Row size={0.2} style={{justifyContent: 'center', marginTop: 20}}>
+            <DotButton
+              big
+              iconName="lightbulb-on-outline"
+              onPress={() => MagicLightBt.turnOn(strips)}
+            />
+            <DotButton
+              big
+              iconName="lightbulb-off-outline"
+              onPress={() => MagicLightBt.turnOff(strips)}
+            />
           </Row>
           <Row
             style={{flexDirection: 'column', alignItems: 'center', margin: 10}}>
