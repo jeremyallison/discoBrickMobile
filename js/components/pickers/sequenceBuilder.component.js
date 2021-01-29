@@ -29,16 +29,22 @@ export const SequenceBuilder = ({sequenceIndex, sequence}) => {
 
   const onDragEnd = ({data}) => dispatch(updateSequence(sequenceIndex, data));
 
-  const addSequenceItem = () =>
-    sequence.colors.length <= 16 &&
-    dispatch(
-      updateSequence(
-        sequenceIndex,
-        sequence.colors.concat([
-          hsv2rgb({hue: Math.round(Math.random() * 360), sat: 1, val: 1}),
-        ]),
-      ),
-    );
+  const addSequenceItem = () => {
+    if (sequence.colors.length > 16) {
+      return false;
+    }
+
+    const newColor = hsv2rgb({
+      hue: Math.round(Math.random() * 360),
+      sat: 1,
+      val: 1,
+    });
+
+    dispatch(setColorPickerModalTarget(sequenceIndex, sequence.colors.length));
+    dispatch(updateSequence(sequenceIndex, sequence.colors.concat([newColor])));
+    dispatch(setModalCurrentColor(newColor));
+    dispatch(setColorPickerModalVisible(true));
+  };
 
   const renderItem = useCallback(
     ({item, index, drag, _isActive}) => {
