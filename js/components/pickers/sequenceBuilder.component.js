@@ -1,9 +1,8 @@
 import React, {useCallback} from 'react';
 import {useDispatch} from 'react-redux';
 import {TouchableOpacity} from 'react-native';
-import {View, Button} from 'native-base';
+import {View} from 'native-base';
 import DraggableFlatList from 'react-native-draggable-flatlist';
-import Icon from 'react-native-vector-icons/Feather';
 
 import {
   updateSequence,
@@ -12,9 +11,9 @@ import {
   setColorPickerModalTarget,
 } from '../../store/actions';
 import {hsv2rgb} from '../../utils/colors';
-import {ThemeStyles} from '../../theme';
 
 import {SequenceListItem} from '../sequenceListItem.component';
+import {DotButton} from '../buttons.component';
 
 export const SequenceBuilder = ({sequenceIndex, sequence}) => {
   const dispatch = useDispatch();
@@ -56,9 +55,7 @@ export const SequenceBuilder = ({sequenceIndex, sequence}) => {
 
   return (
     <View style={{flex: 1, flexDirection: 'row'}}>
-      <Button style={ThemeStyles.lightDotButton} onPress={addSequenceItem}>
-        <Icon size={15} style={ThemeStyles.lightDotIcon} name="plus" />
-      </Button>
+      <DotButton onPress={addSequenceItem} iconName="eyedropper-plus" />
       <DraggableFlatList
         horizontal
         data={sequence.colors}

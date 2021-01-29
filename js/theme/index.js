@@ -53,6 +53,12 @@ export const ThemeStyles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
   },
+  lightDotButtonBig: {
+    height: 60,
+    width: 60,
+    borderRadius: 30,
+  },
+  lightDotIconBig: {},
   lightPillButton: {
     ...CommonStyle.pillDotButton,
     width: 'auto',

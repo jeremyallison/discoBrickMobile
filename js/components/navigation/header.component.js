@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Image} from 'react-native';
 import {Body, Button, Left, Right, Header as NBHeader} from 'native-base';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {ThemeColors} from '../../theme';
 

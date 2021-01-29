@@ -61,7 +61,7 @@ export const SequencePage = () => {
               <H2 style={ThemeStyles.h2}>{sequence.name}</H2>
               <DotButton
                 onPress={() => handleDeleteSequence(i)}
-                iconName="trash"
+                iconName="trash-can-outline"
               />
               <PillButton
                 onPress={() => handlePlay(sequence.colors)}
@@ -74,7 +74,7 @@ export const SequencePage = () => {
         ))}
         <PillButton
           onPress={handleAddSequence}
-          iconName="plus"
+          iconName="playlist-plus"
           text="New sequence"
         />
       </ScrollView>

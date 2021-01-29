@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Text} from 'native-base';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {ThemeStyles} from '../theme';
 
@@ -13,10 +13,16 @@ export const PillButton = ({iconName, text, ...props}) => {
   );
 };
 
-export const DotButton = ({iconName, ...props}) => {
+export const DotButton = ({iconName, big, ...props}) => {
   return (
-    <Button style={ThemeStyles.lightDotButton} {...props}>
-      <Icon size={15} style={ThemeStyles.lightDotIcon} name={iconName} />
+    <Button
+      style={[ThemeStyles.lightDotButton, big && ThemeStyles.lightDotButtonBig]}
+      {...props}>
+      <Icon
+        size={big ? 30 : 15}
+        style={[ThemeStyles.lightDotIcon, big && ThemeStyles.lightDotIconBig]}
+        name={iconName}
+      />
     </Button>
   );
 };

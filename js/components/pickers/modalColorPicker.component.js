@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {StyleSheet, Modal} from 'react-native';
 import {Button, View, Text} from 'native-base';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import store from '../../store';
 import {
@@ -50,7 +50,7 @@ export const ModalColorPicker = () => {
                   dispatch(setColorPickerModalVisible(false));
                 }}>
                 <Icon
-                  name="trash"
+                  name="trash-can-outline"
                   size={20}
                   style={{marginLeft: 15, marginRight: 15, color: '#fff'}}
                 />

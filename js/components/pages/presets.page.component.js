@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {StyleSheet} from 'react-native';
 import {H2, Text, Button} from 'native-base';
 import {Row, Grid} from 'react-native-easy-grid';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {DisconnectedPlaceholder} from '../disconnected.component';
 
@@ -14,8 +14,8 @@ import {ThemeColors, ThemeStyles} from '../../theme';
 const iconsPerType = {
   fade: 'feather',
   throb: 'feather',
-  strobe: 'zap',
-  cut: 'grid',
+  strobe: 'lightning-bolt-outline',
+  cut: 'view-grid-outline',
 };
 
 const presetDetails = {
