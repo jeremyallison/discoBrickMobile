@@ -5,7 +5,7 @@ import {Row, Grid} from 'react-native-easy-grid';
 import {debounce} from 'lodash';
 
 import store from '../../store';
-import {setCurrentColor, setSelectedPreset} from '../../store/actions';
+import {setCurrentColor, setCurrentPreset} from '../../store/actions';
 import {MagicLightBt} from '../../utils/magicLightBt';
 import {ThemeStyles} from '../../theme';
 
@@ -23,7 +23,7 @@ export const ColorPickerPage = () => {
 
   const colorChangeHandler = (color) => {
     btSendColor(color, strips);
-    store.dispatch(setSelectedPreset(null));
+    store.dispatch(setCurrentPreset(null));
     store.dispatch(setCurrentColor(color));
   };
 

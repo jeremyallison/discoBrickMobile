@@ -3,14 +3,14 @@ import {useSelector, useDispatch} from 'react-redux';
 import {StyleSheet} from 'react-native';
 import {H2, Text, Button} from 'native-base';
 import {Row, Grid} from 'react-native-easy-grid';
-import Slider from '@react-native-community/slider';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {DisconnectedPlaceholder} from '../disconnected.component';
 
-import {setSelectedPreset} from '../../store/actions';
+import {setCurrentPreset, setCurrentPresetSpeed} from '../../store/actions';
 import {Presets as Ps, MagicLightBt} from '../../utils/magicLightBt';
 import {ThemeColors, ThemeStyles} from '../../theme';
+import {SpeedSlider} from '../pickers/speedSlider.component';
 
 const iconsPerType = {
   fade: 'blur',
@@ -44,11 +44,18 @@ export const PresetsPage = () => {
   const dispatch = useDispatch();
 
   const strips = useSelector(({strips}) => strips),
-    selectedPreset = useSelector(({selectedPreset}) => selectedPreset);
+    {preset: currentPreset, speed} = useSelector(
+      ({currentPreset}) => currentPreset,
+    );
 
   const sendPreset = (presetCode) => {
-    MagicLightBt.sendPreset(presetCode, 1, strips);
-    dispatch(setSelectedPreset(presetCode));
+    MagicLightBt.sendPreset(presetCode, 6 - speed, strips);
+    dispatch(setCurrentPreset(presetCode));
+  };
+
+  const setSpeed = (speed) => {
+    MagicLightBt.sendPreset(currentPreset, 6 - speed, strips);
+    dispatch(setCurrentPresetSpeed(speed));
   };
 
   return (
@@ -74,8 +81,8 @@ export const PresetsPage = () => {
                   key={name}
                   onPress={() => sendPreset(Ps[psKey])}
                   style={
-                    selectedPreset === Ps[psKey]
-                      ? styles.selectedPresetButton
+                    currentPreset === Ps[psKey]
+                      ? styles.currentPresetButton
                       : styles.presetButton
                   }>
                   <Icon
@@ -83,15 +90,15 @@ export const PresetsPage = () => {
                     name={iconsPerType[type]}
                     color={color}
                     style={
-                      selectedPreset === Ps[psKey]
-                        ? styles.selectedPresetIcon
+                      currentPreset === Ps[psKey]
+                        ? styles.currentPresetIcon
                         : styles.presetIcon
                     }
                   />
                   <Text
                     style={
-                      selectedPreset === Ps[psKey]
-                        ? styles.selectedPresetText
+                      currentPreset === Ps[psKey]
+                        ? styles.currentPresetText
                         : styles.presetText
                     }>
                     {name}
@@ -100,14 +107,8 @@ export const PresetsPage = () => {
               );
             })}
           </Row>
-          <Row size={.2}>
-            <Slider
-              style={{marginLeft: 10, marginRight: 10, flex: 1, height: 40}}
-              minimumValue={1}
-              maximumValue={5}
-              minimumTrackTintColor="#FFFFFF"
-              maximumTrackTintColor="#000000"
-            />
+          <Row size={0.2}>
+            <SpeedSlider value={speed} onSpeedSelect={setSpeed} />
           </Row>
         </Grid>
       ) : (
@@ -118,7 +119,7 @@ export const PresetsPage = () => {
 };
 
 const styles = StyleSheet.create({
-  selectedPresetButton: {
+  currentPresetButton: {
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#fff',
@@ -138,13 +139,13 @@ const styles = StyleSheet.create({
     margin: 5,
     justifyContent: 'flex-start',
   },
-  selectedPresetIcon: {
+  currentPresetIcon: {
     marginLeft: 10,
   },
   presetIcon: {
     marginLeft: 10,
   },
-  selectedPresetText: {
+  currentPresetText: {
     color: ThemeColors.highlight,
     marginLeft: -10,
   },

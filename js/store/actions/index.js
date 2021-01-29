@@ -9,8 +9,11 @@ export const SET_ACTIVE_TAB = 'SET_ACTIVE_TAB';
 export const SET_COLOR_PICKER_MODAL_VISIBLE = 'SET_COLOR_PICKER_MODAL_VISIBLE';
 export const SET_COLOR_PICKER_MODAL_TARGET = 'SET_COLOR_PICKER_MODAL_TARGET';
 export const SET_COLOR_PICKER_MODAL_COLOR = 'SET_COLOR_PICKER_MODAL_COLOR';
-export const SET_SELECTED_PRESET = 'SET_SELECTED_PRESET';
+export const SET_CURRENT_PRESET = 'SET_CURRENT_PRESET';
+export const SET_CURRENT_PRESET_SPEED = 'SET_CURRENT_PRESET_SPEED';
 export const ADD_SEQUENCE = 'ADD_SEQUENCE';
+export const SET_CURRENT_SEQUENCE = 'SET_CURRENT_SEQUENCE';
+export const SET_CURRENT_SEQUENCE_SPEED = 'SET_CURRENT_SEQUENCE_SPEED';
 export const UPDATE_SEQUENCE = 'UPDATE_SEQUENCE';
 export const UPDATE_SEQUENCE_NAME = 'UPDATE_SEQUENCE_NAME';
 export const DELETE_SEQUENCE = 'DELETE_SEQUENCE';
@@ -61,12 +64,24 @@ export const setModalCurrentColor = (payload) => {
   return {type: SET_COLOR_PICKER_MODAL_COLOR, payload};
 };
 
-export const setSelectedPreset = (payload) => {
-  return {type: SET_SELECTED_PRESET, payload};
+export const setCurrentPreset = (payload) => {
+  return {type: SET_CURRENT_PRESET, payload};
+};
+
+export const setCurrentPresetSpeed = (payload) => {
+  return {type: SET_CURRENT_PRESET_SPEED, payload};
 };
 
 export const addSequence = () => {
   return {type: ADD_SEQUENCE};
+};
+
+export const setCurrentSequence = (payload) => {
+  return {type: SET_CURRENT_SEQUENCE, payload};
+};
+
+export const setCurrentSequenceSpeed = (payload) => {
+  return {type: SET_CURRENT_SEQUENCE_SPEED, payload};
 };
 
 export const updateSequence = (sequenceIndex, payload) => {

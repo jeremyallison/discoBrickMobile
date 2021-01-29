@@ -11,8 +11,11 @@ import {
   SET_COLOR_PICKER_MODAL_VISIBLE,
   SET_COLOR_PICKER_MODAL_TARGET,
   SET_COLOR_PICKER_MODAL_COLOR,
-  SET_SELECTED_PRESET,
+  SET_CURRENT_PRESET,
+  SET_CURRENT_PRESET_SPEED,
   ADD_SEQUENCE,
+  SET_CURRENT_SEQUENCE,
+  SET_CURRENT_SEQUENCE_SPEED,
   UPDATE_SEQUENCE,
   UPDATE_SEQUENCE_NAME,
   DELETE_SEQUENCE,
@@ -32,7 +35,14 @@ const initialState = {
     currentColor: {r: 255, g: 255, b: 255},
     target: null,
   },
-  selectedPreset: null,
+  currentPreset: {
+    preset: null,
+    speed: 5,
+  },
+  currentSequence: {
+    sequence: null,
+    speed: 5,
+  },
   sequences: [
     {
       name: 'Test sequence 1',
@@ -139,10 +149,16 @@ function rootReducer(state = initialState, action) {
         },
       };
 
-    case SET_SELECTED_PRESET:
+    case SET_CURRENT_PRESET:
       return {
         ...state,
-        selectedPreset: action.payload,
+        currentPreset: {...state.currentPreset, preset: action.payload},
+      };
+
+    case SET_CURRENT_PRESET_SPEED:
+      return {
+        ...state,
+        currentPreset: {...state.currentPreset, speed: action.payload},
       };
 
     case ADD_SEQUENCE:
@@ -151,6 +167,18 @@ function rootReducer(state = initialState, action) {
         sequences: state.sequences.concat([
           {name: `New sequence ${state.sequences.length + 1}`, colors: []},
         ]),
+      };
+
+    case SET_CURRENT_SEQUENCE:
+      return {
+        ...state,
+        currentSequence: {...state.currentSequence, sequence: action.payload},
+      };
+
+    case SET_CURRENT_SEQUENCE_SPEED:
+      return {
+        ...state,
+        currentSequence: {...state.currentSequence, speed: action.payload},
       };
 
     case UPDATE_SEQUENCE:
