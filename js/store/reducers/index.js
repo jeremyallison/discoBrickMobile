@@ -1,3 +1,4 @@
+import {isEmulatorSync} from 'react-native-device-info';
 import {Pages} from '../../components/pages/pages.constants';
 
 import {
@@ -25,8 +26,12 @@ import {
 
 const initialState = {
   availableStrips: [],
-  // strips: [{device: {id: 'mock'}}],
-  strips: [],
+  strips: isEmulatorSync()
+    ? [
+        {device: {id: 'mock1', name: 'Mock Strip1'}},
+        {device: {id: 'mock2', name: 'Mock Strip2'}},
+      ]
+    : [],
   scanning: false,
   currentColor: {r: 255, g: 255, b: 255},
   activeTab: Pages.COLOR_PICKER,

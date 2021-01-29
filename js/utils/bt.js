@@ -1,3 +1,4 @@
+import {isEmulatorSync} from 'react-native-device-info';
 import {BleManager} from 'react-native-ble-plx';
 import {Buffer} from 'buffer';
 
@@ -8,6 +9,8 @@ const asyncFilter = async (arr, predicate) => {
   return arr.filter((_v, index) => results[index]);
 };
 
+const __DEBUG__ = isEmulatorSync();
+
 export class Bt {
   static manager = new BleManager();
   static subscription;
@@ -17,24 +20,27 @@ export class Bt {
   }
 
   static async scanForDevices(addAvailableStrip) {
-    return new Promise(async (resolve, reject) => {
-      const state = await this.manager.state();
+    return (
+      !__DEBUG__ &&
+      new Promise(async (resolve, reject) => {
+        const state = await this.manager.state();
 
-      if (state !== 'PoweredOn') {
-        return reject('BT manager not ready, maybe BT is OFF?');
-      }
-
-      this.manager.stopDeviceScan();
-      this.manager.startDeviceScan(null, null, async (error, device) => {
-        if (error) {
-          return reject(error);
+        if (state !== 'PoweredOn') {
+          return reject('BT manager not ready, maybe BT is OFF?');
         }
 
-        if (device.name && device.name.startsWith('LEDBLE-')) {
-          addAvailableStrip(device);
-        }
-      });
-    });
+        this.manager.stopDeviceScan();
+        this.manager.startDeviceScan(null, null, async (error, device) => {
+          if (error) {
+            return reject(error);
+          }
+
+          if (device.name && device.name.startsWith('LEDBLE-')) {
+            addAvailableStrip(device);
+          }
+        });
+      })
+    );
   }
 
   static stopScanning() {
@@ -80,7 +86,7 @@ export class Bt {
 
   static writeMessage = async (strip, msg) =>
     msg.length <= 20
-      ? strip.writeWithoutResponse(base64encode(msg))
+      ? !__DEBUG__ && strip.writeWithoutResponse(base64encode(msg))
       : this.writeLongMessage(strip, msg);
 
   static writeLongMessage = async (strip, msg) => {
