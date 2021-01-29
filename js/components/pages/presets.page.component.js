@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {StyleSheet} from 'react-native';
 import {H2, Text, Button} from 'native-base';
 import {Row, Grid} from 'react-native-easy-grid';
+import Slider from '@react-native-community/slider';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {DisconnectedPlaceholder} from '../disconnected.component';
@@ -12,8 +13,8 @@ import {Presets as Ps, MagicLightBt} from '../../utils/magicLightBt';
 import {ThemeColors, ThemeStyles} from '../../theme';
 
 const iconsPerType = {
-  fade: 'feather',
-  throb: 'feather',
+  fade: 'blur',
+  throb: 'blur',
   strobe: 'lightning-bolt-outline',
   cut: 'view-grid-outline',
 };
@@ -99,6 +100,15 @@ export const PresetsPage = () => {
               );
             })}
           </Row>
+          <Row size={.2}>
+            <Slider
+              style={{marginLeft: 10, marginRight: 10, flex: 1, height: 40}}
+              minimumValue={1}
+              maximumValue={5}
+              minimumTrackTintColor="#FFFFFF"
+              maximumTrackTintColor="#000000"
+            />
+          </Row>
         </Grid>
       ) : (
         <DisconnectedPlaceholder />
@@ -122,7 +132,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: StyleSheet.hairlineWidth,
     width: 170,
-    height: 60,
+    height: 50,
     backgroundColor: 'transparent',
     borderColor: '#fff',
     margin: 5,

@@ -75,12 +75,9 @@ export const AvailableStripList = (props) => {
           connectedStrips.map(({device}) => (
             <Card key={device.id} style={{alignItems: 'center', width: '100%'}}>
               <CardItem>
-                <View>
-                  <Icon size={25} name="led-strip-variant" />
-                </View>
-                <View>
-                  <Text style={{flexWrap: 'nowrap'}}>{' ' + device.name}</Text>
-                </View>
+                <Icon size={25} name="led-strip-variant" />
+                <Text style={{flex: 1}}>{' ' + device.name}</Text>
+                <Icon size={25} name="bluetooth" color="#6bb1ff" />
               </CardItem>
             </Card>
           ))
@@ -95,12 +92,8 @@ export const AvailableStripList = (props) => {
           {availableStrips.map((device) => (
             <Card key={device.id} style={{alignItems: 'center', width: '100%'}}>
               <CardItem button onPress={() => onConnect(device)}>
-                <View>
-                  <Icon size={25} name="led-strip-variant" />
-                </View>
-                <View>
-                  <Text style={{flexWrap: 'nowrap'}}>{' ' + device.name}</Text>
-                </View>
+                <Icon size={25} name="led-strip-variant" />
+                <Text style={{flex: 1}}>{' ' + device.name}</Text>
               </CardItem>
             </Card>
           ))}
