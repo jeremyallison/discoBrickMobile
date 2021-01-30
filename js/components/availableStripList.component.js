@@ -40,10 +40,7 @@ const onDisconnect = (_e, device) => {
   const {strips} = store.getState();
 
   const strip =
-    strips &&
-    strips.find(
-      (strip) => parseInt(strip.device.id, 10) === parseInt(device.id, 10),
-    );
+    strips && strips.find((strip) => device.id === strips[0].device.id);
 
   if (strip) {
     strip.disconnectSubscription.remove();

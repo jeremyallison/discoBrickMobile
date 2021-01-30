@@ -1,6 +1,8 @@
 import {isEmulatorSync} from 'react-native-device-info';
 import {Pages} from '../../components/pages/pages.constants';
 
+const __DEBUG__ = isEmulatorSync();
+
 import {
   ADD_STRIP,
   REMOVE_STRIP,
@@ -26,7 +28,7 @@ import {
 
 const initialState = {
   availableStrips: [],
-  strips: isEmulatorSync()
+  strips: __DEBUG__
     ? [
         {device: {id: 'mock1', name: 'Mock Strip1'}},
         {device: {id: 'mock2', name: 'Mock Strip2'}},
@@ -48,33 +50,35 @@ const initialState = {
     sequence: null,
     speed: 5,
   },
-  sequences: [
-    {
-      name: 'Test sequence 1',
-      colors: [
-        {r: 255, g: 0, b: 0},
-        {r: 255, g: 255, b: 0},
-        {r: 0, g: 255, b: 0},
-        {r: 0, g: 255, b: 255},
-        {r: 0, g: 0, b: 255},
-        {r: 255, g: 0, b: 255},
-        {r: 255, g: 0, b: 0},
-        {r: 255, g: 255, b: 0},
-        {r: 0, g: 255, b: 0},
-        {r: 0, g: 255, b: 255},
-        {r: 0, g: 0, b: 255},
-        {r: 255, g: 0, b: 255},
-      ],
-    },
-    {
-      name: 'Test sequence 2',
-      colors: [
-        {r: 0, g: 0, b: 255},
-        {r: 0, g: 255, b: 0},
-        {r: 255, g: 0, b: 0},
-      ],
-    },
-  ],
+  sequences: __DEBUG__
+    ? [
+        {
+          name: 'Test sequence 1',
+          colors: [
+            {r: 255, g: 0, b: 0},
+            {r: 255, g: 255, b: 0},
+            {r: 0, g: 255, b: 0},
+            {r: 0, g: 255, b: 255},
+            {r: 0, g: 0, b: 255},
+            {r: 255, g: 0, b: 255},
+            {r: 255, g: 0, b: 0},
+            {r: 255, g: 255, b: 0},
+            {r: 0, g: 255, b: 0},
+            {r: 0, g: 255, b: 255},
+            {r: 0, g: 0, b: 255},
+            {r: 255, g: 0, b: 255},
+          ],
+        },
+        {
+          name: 'Test sequence 2',
+          colors: [
+            {r: 0, g: 0, b: 255},
+            {r: 0, g: 255, b: 0},
+            {r: 255, g: 0, b: 0},
+          ],
+        },
+      ]
+    : [],
 };
 
 function rootReducer(state = initialState, action) {
