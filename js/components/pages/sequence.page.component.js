@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {StyleSheet, ScrollView} from 'react-native';
+import {StyleSheet, ScrollView, TextInput} from 'react-native';
 import {H2, View, Segment, Button, Text} from 'native-base';
 
 import {
@@ -8,6 +8,7 @@ import {
   addSequence,
   setCurrentSequence,
   setCurrentSequenceSpeed,
+  updateSequenceName,
 } from '../../store/actions';
 import {MagicLightBt, SequenceModes} from '../../utils/magicLightBt';
 import {ThemeColors, ThemeStyles} from '../../theme';
@@ -39,6 +40,9 @@ export const SequencePage = () => {
     MagicLightBt.sendSequence(colors, currentMode, 6 - speed, strips);
     dispatch(setCurrentSequence(sequenceIndex));
   };
+
+  const handleRenameSequence = (i, name) =>
+    dispatch(updateSequenceName(i, name));
 
   const setSpeed = (speed) => {
     currentSequence !== null &&
@@ -81,11 +85,18 @@ export const SequencePage = () => {
         onSpeedSelect={setSpeed}
         style={{margin: 10}}
       />
-      <ScrollView style={{padding: 10}}>
+      <ScrollView style={{paddingTop: 10, paddingLeft: 10, paddingRight: 10, height: '100%'}}>
         {sequences.map((sequence, i) => (
-          <View key={i}>
-            <View style={styles.sequenceContainer}>
-              <H2 style={[ThemeStyles.h2, {flex: 1}]}>{sequence.name}</H2>
+          <View key={i} style={styles.sequenceContainer}>
+            <View style={styles.sequenceNameContainer}>
+              <TextInput
+                onBlur={({nativeEvent: {text}}) =>
+                  handleRenameSequence(i, text)
+                }
+                style={[ThemeStyles.h2, {flex: 1, fontSize: 20}]}
+                defaultValue={sequence.name}
+                autoCorrect={false}
+              />
               <DotButton
                 onPress={() => handleDeleteSequence(i)}
                 iconName="trash-can-outline"
@@ -103,6 +114,7 @@ export const SequencePage = () => {
           onPress={handleAddSequence}
           iconName="playlist-plus"
           text="New sequence"
+          style={{alignSelf: 'center', margin: 20}}
         />
       </ScrollView>
       <ModalColorPicker />
@@ -114,7 +126,9 @@ export const SequencePage = () => {
 
 const styles = StyleSheet.create({
   sequenceContainer: {
-    marginTop: 20,
+    marginBottom: 20,
+  },
+  sequenceNameContainer: {
     marginBottom: 10,
     flexDirection: 'row',
     borderBottomColor: '#fff',
