@@ -8,7 +8,9 @@ import {ThemeStyles} from '../theme';
 export const PillButton = ({iconName, text, style, ...props}) => {
   return (
     <Button style={[ThemeStyles.lightPillButton, style]} {...props}>
-      <Icon size={15} style={ThemeStyles.lightPillIcon} name={iconName} />
+      {iconName && (
+        <Icon size={15} style={ThemeStyles.lightPillIcon} name={iconName} />
+      )}
       <Text>{text}</Text>
     </Button>
   );

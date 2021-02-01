@@ -13,7 +13,7 @@ import {QuickColors} from '../pickers/quickColors.component';
 import {DisconnectedPlaceholder} from '../disconnected.component';
 import {DotButton} from '../buttons.component';
 import {hsv2rgb} from '../../utils/colors';
-import { H2 } from '../translatedText.component';
+import {H2} from '../translatedText.component';
 
 export const ColorPickerPage = () => {
   const dispatch = useDispatch();

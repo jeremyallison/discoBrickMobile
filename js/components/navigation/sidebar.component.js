@@ -3,6 +3,7 @@ import {StyleSheet, Image} from 'react-native';
 import {View} from 'native-base';
 
 import {AvailableStripList} from '../availableStripList.component';
+import {LanguageSelector} from '../languageSelector.component';
 
 export const Sidebar = ({isDrawerOpen}) => {
   return (
@@ -11,7 +12,12 @@ export const Sidebar = ({isDrawerOpen}) => {
         source={require('../../../assets/images/app-menu-header.jpg')}
         style={styles.header}
       />
-      <AvailableStripList scan={isDrawerOpen} />
+      <View style={{flex: 1}}>
+        <AvailableStripList scan={isDrawerOpen} />
+      </View>
+      <View style={styles.languageSelector}>
+        <LanguageSelector />
+      </View>
     </View>
   );
 };
@@ -33,5 +39,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     width: '100%',
     marginBottom: 30,
+  },
+  languageSelector: {
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    margin: 10,
   },
 });
