@@ -1,12 +1,13 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {Footer as NBFooter, FooterTab, Button, Text} from 'native-base';
+import {Footer as NBFooter, FooterTab, Button} from 'native-base';
 import Icon from 'react-native-vector-icons/Feather';
 
 import {Pages} from '../pages/pages.constants';
 import {setActiveTab} from '../../store/actions';
 import {ThemeColors} from '../../theme';
+import {Text} from '../../components/translatedText.component';
 
 const pageTabs = [
   {page: Pages.COLOR_PICKER, text: 'Single color', icon: 'sliders'},

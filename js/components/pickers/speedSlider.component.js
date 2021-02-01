@@ -1,7 +1,9 @@
 import React from 'react';
 import Slider from '@react-native-community/slider';
-import {Text, View} from 'native-base';
+import {View} from 'native-base';
+
 import {ThemeColors} from '../../theme';
+import {Text} from '../../components/translatedText.component';
 
 export const SpeedSlider = ({value, onSpeedSelect, ...props}) => (
   <View style={{flexDirection: 'column', flex: 1}} {...props}>
@@ -13,9 +15,7 @@ export const SpeedSlider = ({value, onSpeedSelect, ...props}) => (
         marginRight: 10,
       }}>
       <Text style={{flex: 0, color: '#fff'}}>1</Text>
-      <Text style={{flex: 1, color: '#fff', textAlign: 'center'}}>
-        Vitesse!
-      </Text>
+      <Text style={{flex: 1, color: '#fff', textAlign: 'center'}}>Speed</Text>
       <Text style={{flex: 0, color: '#fff'}}>5</Text>
     </View>
     <Slider

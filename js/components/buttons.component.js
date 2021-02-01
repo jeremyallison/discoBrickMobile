@@ -1,7 +1,8 @@
 import React from 'react';
-import {Button, Text} from 'native-base';
+import {Button} from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import {Text} from '../components/translatedText.component';
 import {ThemeStyles} from '../theme';
 
 export const PillButton = ({iconName, text, style, ...props}) => {

@@ -1,7 +1,7 @@
 import React from 'react';
-import {H1, H3} from 'native-base';
 
 import {ThemeStyles} from '../theme';
+import {H1, H3} from './translatedText.component';
 
 export const DisconnectedPlaceholder = () => (
   <>

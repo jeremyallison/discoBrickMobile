@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {StyleSheet} from 'react-native';
-import {H2, Text, Button, View} from 'native-base';
+import {Button, View} from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {DisconnectedPlaceholder} from '../disconnected.component';
@@ -10,6 +10,7 @@ import {setCurrentPreset, setCurrentPresetSpeed} from '../../store/actions';
 import {Presets as Ps, MagicLightBt} from '../../utils/magicLightBt';
 import {ThemeStyles} from '../../theme';
 import {SpeedSlider} from '../pickers/speedSlider.component';
+import {H2, Text} from '../../components/translatedText.component';
 
 const iconsPerType = {
   fade: 'blur',
@@ -19,24 +20,24 @@ const iconsPerType = {
 };
 
 const presetDetails = {
-  [Ps.CUT_SEVEN]: {name: 'Séquence multi', type: 'cut', color: '#fff'},
-  [Ps.FADE_SEVEN]: {name: 'Fondu multi', type: 'fade', color: '#fff'},
-  [Ps.THROB_RED]: {name: 'Fondu rouge', type: 'throb', color: '#FF0000'},
-  [Ps.THROB_GREEN]: {name: 'Fondu vert', type: 'throb', color: '#00FF00'},
-  [Ps.THROB_BLUE]: {name: 'Fondu bleu', type: 'throb', color: '#0000FF'},
-  [Ps.THROB_YELLOW]: {name: 'Fondu jaune', type: 'throb', color: '#FFFF00'},
-  [Ps.STROBE_SEVEN]: {name: 'Éclairs multi', type: 'strobe', color: '#fff'},
-  [Ps.STROBE_RED]: {name: 'Éclairs rouge', type: 'strobe', color: '#FF0000'},
-  [Ps.STROBE_GREEN]: {name: 'Éclairs vert', type: 'strobe', color: '#00FF00'},
-  [Ps.STROBE_BLUE]: {name: 'Éclairs bleu', type: 'strobe', color: '#0000FF'},
-  [Ps.STROBE_YELLOW]: {name: 'Éclairs jaune', type: 'strobe', color: '#FFFF00'},
-  [Ps.STROBE_CYAN]: {name: 'Éclairs cyan', type: 'strobe', color: '#00FFFF'},
+  [Ps.CUT_SEVEN]: {name: 'Multi cut', type: 'cut', color: '#fff'},
+  [Ps.FADE_SEVEN]: {name: 'Multi fade', type: 'fade', color: '#fff'},
+  [Ps.THROB_RED]: {name: 'Red throb', type: 'throb', color: '#FF0000'},
+  [Ps.THROB_GREEN]: {name: 'Green throb', type: 'throb', color: '#00FF00'},
+  [Ps.THROB_BLUE]: {name: 'Blue throb', type: 'throb', color: '#0000FF'},
+  [Ps.THROB_YELLOW]: {name: 'Yellow throb', type: 'throb', color: '#FFFF00'},
+  [Ps.STROBE_SEVEN]: {name: 'Multi strobe', type: 'strobe', color: '#fff'},
+  [Ps.STROBE_RED]: {name: 'Red strobe', type: 'strobe', color: '#FF0000'},
+  [Ps.STROBE_GREEN]: {name: 'Green strobe', type: 'strobe', color: '#00FF00'},
+  [Ps.STROBE_BLUE]: {name: 'Blue strobe', type: 'strobe', color: '#0000FF'},
+  [Ps.STROBE_YELLOW]: {name: 'Yellow strobe', type: 'strobe', color: '#FFFF00'},
+  [Ps.STROBE_CYAN]: {name: 'Cyan strobe', type: 'strobe', color: '#00FFFF'},
   [Ps.STROBE_PURPLE]: {
-    name: 'Éclairs violet',
+    name: 'Purple strobe',
     type: 'strobe',
     color: '#FF00FF',
   },
-  [Ps.STROBE_WHITE]: {name: 'Éclairs blanc', type: 'strobe', color: '#fff'},
+  [Ps.STROBE_WHITE]: {name: 'White strobe', type: 'strobe', color: '#fff'},
 };
 
 export const PresetsPage = () => {

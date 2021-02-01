@@ -1,14 +1,15 @@
 import React from 'react';
-import {Segment, Button, Text} from 'native-base';
+import {Segment, Button} from 'native-base';
 import {StyleSheet} from 'react-native';
 
 import {SequenceModes} from '../../utils/magicLightBt';
 import {ThemeColors} from '../../theme';
+import {Text} from '../../components/translatedText.component';
 
 const SequenceModeNames = {
-  [SequenceModes.FADE]: 'Fondu',
-  [SequenceModes.CUT]: 'Coupé',
-  [SequenceModes.STROBE]: 'Eclairs',
+  [SequenceModes.FADE]: 'Fade',
+  [SequenceModes.CUT]: 'Cut',
+  [SequenceModes.STROBE]: 'Strobe',
 };
 
 export const SequenceModePicker = ({value, onModeSelect}, ...props) => {

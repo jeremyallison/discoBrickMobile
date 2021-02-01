@@ -1,8 +1,10 @@
 import React, {useEffect} from 'react';
 import {StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {Card, CardItem, H2, Text, View} from 'native-base';
+import {Card, CardItem, View} from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import {H2, Text} from '../components/translatedText.component';
 
 import {Bt} from '../utils/bt';
 import {MagicLightBt} from '../utils/magicLightBt';

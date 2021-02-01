@@ -96,7 +96,7 @@ export const SequencePage = () => {
               <PillButton
                 onPress={() => handlePlay(sequence.colors, i)}
                 iconName="play"
-                text="Jouer"
+                text="Play"
               />
             </View>
             <SequenceBuilder sequence={sequence} sequenceIndex={i} />

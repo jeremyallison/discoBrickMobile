@@ -1,0 +1,37 @@
+{
+  "fr": {
+    "translation": {
+      "Find your shade...": "Trouve ta couleur...",
+      "...or quick pick a color": "...ou choisis en une :",
+      "Single color": "Couleur",
+      "Presets": "Modes",
+      "Sequences": "Séquences",
+      "Choose a funky preset": "Choisis ton mode le plus funky",
+      "Speed": "Vitesse!",
+      "New sequence": "Nouvelle séquence",
+      "Play": "Jouer",
+      "Fade": "Fondu",
+      "Cut": "Coupé",
+      "Strobe": "Éclairs",
+      "Multi cut": "Séquence multi",
+      "Multi fade": "Fondu multi",
+      "Red throb": "Fondu rouge",
+      "Green throb": "Fondu vert",
+      "Blue throb": "Fondu bleu",
+      "Yellow throb": "Fondu jaune",
+      "Multi strobe": "Éclairs multi",
+      "Red strobe": "Éclairs rouge",
+      "Green strobe": "Éclairs vert",
+      "Blue strobe": "Éclairs bleu",
+      "Yellow strobe": "Éclairs jaune",
+      "Cyan strobe": "Éclairs cyan",
+      "Purple strobe": "Éclairs violet",
+      "White strobe": "Éclairs blanc",
+      "Save color": "Enregistrer",
+      "Connected bricks": "Bricks connectées",
+      "Available bricks": "Bricks visibles",
+      "No brick connected": "Aucune brick connectée",
+      "Open the menu and turn on your DiscoBrick!": "Ouvre le menu et allume ta DiscoBrick!"
+    }
+  }
+}

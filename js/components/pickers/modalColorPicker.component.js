@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {StyleSheet, Modal} from 'react-native';
-import {Button, View, Text} from 'native-base';
+import {Button, View} from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {
@@ -12,6 +12,7 @@ import {
 } from '../../store/actions';
 
 import {ColorPicker} from './colorPicker.component';
+import {Text} from '../../components/translatedText.component';
 
 export const ModalColorPicker = () => {
   const dispatch = useDispatch();
