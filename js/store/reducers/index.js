@@ -4,6 +4,7 @@ import {Pages} from '../../components/pages/pages.constants';
 const __DEBUG__ = isEmulatorSync();
 
 import {
+  SET_IS_ON,
   ADD_STRIP,
   REMOVE_STRIP,
   ADD_AVAILABLE_STRIP,
@@ -36,6 +37,7 @@ const initialState = {
       ]
     : [],
   scanning: false,
+  isOn: true,
   currentColor: {hue: 0, sat: 1, val: 1},
   activeTab: Pages.COLOR_PICKER,
   colorPickerModal: {
@@ -75,6 +77,12 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+    case SET_IS_ON:
+      return {
+        ...state,
+        isOn: action.payload,
+      };
+
     case ADD_STRIP:
       return {
         ...state,

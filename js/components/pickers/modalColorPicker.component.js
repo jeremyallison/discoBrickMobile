@@ -4,7 +4,6 @@ import {StyleSheet, Modal} from 'react-native';
 import {Button, View, Text} from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import store from '../../store';
 import {
   setColorPickerModalVisible,
   setModalCurrentColor,
@@ -23,7 +22,7 @@ export const ModalColorPicker = () => {
   );
 
   const colorChangeHandler = (color) => {
-    store.dispatch(setModalCurrentColor(color));
+    dispatch(setModalCurrentColor(color));
   };
 
   return (

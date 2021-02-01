@@ -1,11 +1,10 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {H2} from 'native-base';
 import {Row, Grid} from 'react-native-easy-grid';
 import {debounce} from 'lodash';
 
-import store from '../../store';
-import {setCurrentColor, setCurrentPreset} from '../../store/actions';
+import {setCurrentColor, setCurrentPreset, setIsOn} from '../../store/actions';
 import {MagicLightBt} from '../../utils/magicLightBt';
 import {ThemeStyles} from '../../theme';
 
@@ -17,16 +16,28 @@ import {DotButton} from '../buttons.component';
 import {hsv2rgb} from '../../utils/colors';
 
 export const ColorPickerPage = () => {
+  const dispatch = useDispatch();
   const strips = useSelector(({strips}) => strips);
   const currentColor = useSelector(({currentColor}) => currentColor);
+  const isOn = useSelector(({isOn}) => isOn);
 
   const btSendColor = debounce(MagicLightBt.sendColor, 25);
 
   const colorChangeHandler = (color) => {
     const rgbColor = hsv2rgb(color);
     btSendColor(rgbColor, strips);
-    store.dispatch(setCurrentPreset(null));
-    store.dispatch(setCurrentColor(color));
+    dispatch(setCurrentPreset(null));
+    dispatch(setCurrentColor(color));
+  };
+
+  const handleOnOff = (onOff) => {
+    if (onOff) {
+      MagicLightBt.turnOn(strips);
+    } else {
+      MagicLightBt.turnOff(strips);
+    }
+
+    dispatch(setIsOn(onOff));
   };
 
   return (
@@ -37,12 +48,14 @@ export const ColorPickerPage = () => {
             <DotButton
               big
               iconName="lightbulb-on-outline"
-              onPress={() => MagicLightBt.turnOn(strips)}
+              active={isOn}
+              onPress={() => handleOnOff(true)}
             />
             <DotButton
               big
               iconName="lightbulb-off-outline"
-              onPress={() => MagicLightBt.turnOff(strips)}
+              active={!isOn}
+              onPress={() => handleOnOff(false)}
             />
           </Row>
           <Row

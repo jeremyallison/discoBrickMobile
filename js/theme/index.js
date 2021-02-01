@@ -44,6 +44,9 @@ export const ThemeStyles = StyleSheet.create({
     width: '100%',
     textAlign: 'center',
   },
+  buttonActive: {
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+  },
   lightDotButton: {
     ...CommonStyle.pillDotButton,
     width: 35,

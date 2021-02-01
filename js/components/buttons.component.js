@@ -13,12 +13,13 @@ export const PillButton = ({iconName, text, style, ...props}) => {
   );
 };
 
-export const DotButton = ({iconName, big, style, ...props}) => {
+export const DotButton = ({iconName, active, big, style, ...props}) => {
   return (
     <Button
       style={[
         ThemeStyles.lightDotButton,
         big && ThemeStyles.lightDotButtonBig,
+        active && ThemeStyles.buttonActive,
         style,
       ]}
       {...props}>

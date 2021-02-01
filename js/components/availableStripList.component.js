@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {StyleSheet} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Card, CardItem, H2, Text, View} from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -14,52 +14,54 @@ import {
   setScanningState,
   addAvailableStrip,
   clearAvailableStrips,
+  setIsOn,
 } from '../store/actions';
 
-const onConnect = (device) => {
-  Bt.connectToDevice(device)
-    .then(({device, characteristic}) => {
-      MagicLightBt.sayHello(characteristic);
-
-      store.dispatch(clearAvailableStrips());
-      store.dispatch(setScanningState(false));
-      store.dispatch(
-        addStrip({
-          device,
-          characteristic,
-          disconnectSubscription: device.onDisconnected(onDisconnect),
-        }),
-      );
-    })
-    .catch(console.log);
-};
-
-const onDisconnect = (_e, device) => {
-  console.log('disconnected device', device.id);
-
-  const {strips} = store.getState();
-
-  const strip =
-    strips && strips.find((strip) => device.id === strips[0].device.id);
-
-  if (strip) {
-    strip.disconnectSubscription.remove();
-    store.dispatch(removeStrip(device.id));
-  }
-};
-
 export const AvailableStripList = (props) => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (props.scan) {
-      store.dispatch(clearAvailableStrips());
-      store.dispatch(setScanningState(true));
-      Bt.scanForDevices((payload) =>
-        store.dispatch(addAvailableStrip(payload)),
-      );
+      dispatch(clearAvailableStrips());
+      dispatch(setScanningState(true));
+      Bt.scanForDevices((payload) => dispatch(addAvailableStrip(payload)));
     } else {
       Bt.stopScanning();
     }
   }, [props.scan]);
+
+  const onConnect = (device) => {
+    Bt.connectToDevice(device)
+      .then(({device, characteristic}) => {
+        MagicLightBt.sayHello(characteristic);
+
+        dispatch(setIsOn(true));
+        dispatch(clearAvailableStrips());
+        dispatch(setScanningState(false));
+        dispatch(
+          addStrip({
+            device,
+            characteristic,
+            disconnectSubscription: device.onDisconnected(onDisconnect),
+          }),
+        );
+      })
+      .catch(console.log);
+  };
+
+  const onDisconnect = (_e, device) => {
+    console.log('disconnected device', device.id);
+
+    const {strips} = store.getState();
+
+    const strip =
+      strips && strips.find((strip) => device.id === strips[0].device.id);
+
+    if (strip) {
+      strip.disconnectSubscription.remove();
+      dispatch(removeStrip(device.id));
+    }
+  };
 
   const availableStrips = useSelector(({availableStrips}) => availableStrips);
   const connectedStrips = useSelector(({strips}) => strips);

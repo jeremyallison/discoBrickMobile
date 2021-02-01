@@ -1,3 +1,4 @@
+export const SET_IS_ON = 'SET_IS_ON';
 export const ADD_STRIP = 'ADD_STRIP';
 export const REMOVE_STRIP = 'REMOVE_STRIP';
 export const ADD_AVAILABLE_STRIP = 'ADD_AVAILABLE_STRIP';
@@ -20,6 +21,10 @@ export const UPDATE_SEQUENCE_NAME = 'UPDATE_SEQUENCE_NAME';
 export const DELETE_SEQUENCE = 'DELETE_SEQUENCE';
 export const UPDATE_SEQUENCE_ITEM_COLOR = 'UPDATE_SEQUENCE_ITEM_COLOR';
 export const DELETE_SEQUENCE_ITEM = 'DELETE_SEQUENCE_ITEM';
+
+export const setIsOn = (payload) => {
+  return {type: SET_IS_ON, payload};
+};
 
 export const addStrip = (payload) => {
   return {type: ADD_STRIP, payload};
