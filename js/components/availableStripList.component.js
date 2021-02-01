@@ -28,7 +28,7 @@ export const AvailableStripList = (props) => {
     } else {
       Bt.stopScanning();
     }
-  }, [props.scan]);
+  }, [props.scan, dispatch]);
 
   const onConnect = (device) => {
     Bt.connectToDevice(device)

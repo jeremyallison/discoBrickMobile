@@ -22,6 +22,7 @@ export const SequenceBuilder = ({sequenceIndex, sequence}) => {
     if (sequence.colors.length === 0) {
       addSequenceItem();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const openModal = useCallback(
