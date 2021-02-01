@@ -4,7 +4,7 @@ import {View} from 'react-native';
 
 export const ColorPicker = ({hsv, colorChangeHandler}) => {
   const onSatValPickerChange = ({saturation, value}) => {
-    const newHsv = {hue: hsv.hue, sat: saturation, val: value};
+    const newHsv = {hue: hsv.hue, sat: saturation, val: Math.max(value, 0.002)};
     colorChangeHandler(newHsv);
   };
 
