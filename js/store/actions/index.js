@@ -14,6 +14,7 @@ export const SET_CURRENT_PRESET_SPEED = 'SET_CURRENT_PRESET_SPEED';
 export const ADD_SEQUENCE = 'ADD_SEQUENCE';
 export const SET_CURRENT_SEQUENCE = 'SET_CURRENT_SEQUENCE';
 export const SET_CURRENT_SEQUENCE_SPEED = 'SET_CURRENT_SEQUENCE_SPEED';
+export const SET_CURRENT_SEQUENCE_MODE = 'SET_CURRENT_SEQUENCE_MODE';
 export const UPDATE_SEQUENCE = 'UPDATE_SEQUENCE';
 export const UPDATE_SEQUENCE_NAME = 'UPDATE_SEQUENCE_NAME';
 export const DELETE_SEQUENCE = 'DELETE_SEQUENCE';
@@ -82,6 +83,10 @@ export const setCurrentSequence = (payload) => {
 
 export const setCurrentSequenceSpeed = (payload) => {
   return {type: SET_CURRENT_SEQUENCE_SPEED, payload};
+};
+
+export const setCurrentSequenceMode = (payload) => {
+  return {type: SET_CURRENT_SEQUENCE_MODE, payload};
 };
 
 export const updateSequence = (sequenceIndex, payload) => {

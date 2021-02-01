@@ -1,50 +1,48 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {StyleSheet, ScrollView, TextInput} from 'react-native';
-import {H2, View, Segment, Button, Text} from 'native-base';
+import {View} from 'native-base';
 
 import {
   deleteSequence,
   addSequence,
   setCurrentSequence,
   setCurrentSequenceSpeed,
+  setCurrentSequenceMode,
   updateSequenceName,
 } from '../../store/actions';
-import {MagicLightBt, SequenceModes} from '../../utils/magicLightBt';
-import {ThemeColors, ThemeStyles} from '../../theme';
+import {MagicLightBt} from '../../utils/magicLightBt';
+import {ThemeStyles} from '../../theme';
 
-import {DotButton, PillButton} from '../../components/buttons.component';
+import {DotButton, PillButton} from '../buttons.component';
 import {DisconnectedPlaceholder} from '../disconnected.component';
 import {SequenceBuilder} from '../pickers/sequenceBuilder.component';
-import {ModalColorPicker} from '../../components/pickers/modalColorPicker.component';
+import {ModalColorPicker} from '../pickers/modalColorPicker.component';
+import {SequenceModePicker} from '../pickers/sequenceModePicker.component';
 import {SpeedSlider} from '../pickers/speedSlider.component';
-
-const SequenceModeNames = {
-  [SequenceModes.FADE]: 'Fondu',
-  [SequenceModes.CUT]: 'Coupé',
-  [SequenceModes.STROBE]: 'Eclairs',
-};
 
 export const SequencePage = () => {
   const dispatch = useDispatch();
-  const [currentMode, setCurrentMode] = useState(SequenceModes.FADE);
+
   const strips = useSelector(({strips}) => strips);
   const sequences = useSelector(({sequences}) => sequences),
-    {sequence: currentSequence, speed} = useSelector(
-      ({currentSequence}) => currentSequence,
-    );
+    {
+      sequence: currentSequence,
+      speed: currentSpeed,
+      mode: currentMode,
+    } = useSelector(({currentSequence}) => currentSequence);
 
   const handleAddSequence = () => dispatch(addSequence());
   const handleDeleteSequence = (i) => dispatch(deleteSequence(i));
   const handlePlay = (colors, sequenceIndex) => {
-    MagicLightBt.sendSequence(colors, currentMode, 6 - speed, strips);
+    MagicLightBt.sendSequence(colors, currentMode, 6 - currentSpeed, strips);
     dispatch(setCurrentSequence(sequenceIndex));
   };
 
   const handleRenameSequence = (i, name) =>
     dispatch(updateSequenceName(i, name));
 
-  const setSpeed = (speed) => {
+  const handleSpeedChange = (speed) => {
     currentSequence !== null &&
       MagicLightBt.sendSequence(
         sequences[currentSequence].colors,
@@ -55,27 +53,16 @@ export const SequencePage = () => {
     dispatch(setCurrentSequenceSpeed(speed));
   };
 
-  const segmentButtons = Object.keys(SequenceModes).map((modeKey, i) => (
-    <Button
-      active={currentMode === SequenceModes[modeKey]}
-      onPress={() => setCurrentMode(SequenceModes[modeKey])}
-      key={modeKey}
-      first={i === 0}
-      last={i === Object.keys(SequenceModes).length - 1}
-      style={[
-        styles.segmentButton,
-        currentMode === SequenceModes[modeKey] && styles.segmentButtonActive,
-      ]}>
-      <Text
-        style={[
-          styles.segmentButtonText,
-          currentMode === SequenceModes[modeKey] &&
-            styles.segmentButtonTextActive,
-        ]}>
-        {SequenceModeNames[SequenceModes[modeKey]]}
-      </Text>
-    </Button>
-  ));
+  const handleModeChange = (mode) => {
+    currentSequence !== null &&
+      MagicLightBt.sendSequence(
+        sequences[currentSequence].colors,
+        mode,
+        6 - currentSpeed,
+        strips,
+      );
+    dispatch(setCurrentSequenceMode(mode));
+  };
 
   return strips.length ? (
     <>
@@ -118,10 +105,11 @@ export const SequencePage = () => {
         <ModalColorPicker />
       </ScrollView>
       <View style={[ThemeStyles.parameterFooter, {height: 140}]}>
-        <Segment style={{backgroundColor: 'transparent', marginBottom: 15}}>
-          {segmentButtons}
-        </Segment>
-        <SpeedSlider value={speed} onSpeedSelect={setSpeed} />
+        <SequenceModePicker
+          value={currentMode}
+          onModeSelect={handleModeChange}
+        />
+        <SpeedSlider value={currentSpeed} onSpeedSelect={handleSpeedChange} />
       </View>
     </>
   ) : (
@@ -139,17 +127,5 @@ const styles = StyleSheet.create({
     borderBottomColor: '#fff',
     borderBottomWidth: StyleSheet.hairlineWidth,
     alignItems: 'flex-end',
-  },
-  segmentButton: {
-    borderColor: '#fff',
-  },
-  segmentButtonActive: {
-    backgroundColor: '#fff',
-  },
-  segmentButtonText: {
-    color: '#fff',
-  },
-  segmentButtonTextActive: {
-    color: ThemeColors.highlight,
   },
 });

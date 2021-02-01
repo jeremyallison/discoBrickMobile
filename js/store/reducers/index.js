@@ -19,6 +19,7 @@ import {
   ADD_SEQUENCE,
   SET_CURRENT_SEQUENCE,
   SET_CURRENT_SEQUENCE_SPEED,
+  SET_CURRENT_SEQUENCE_MODE,
   UPDATE_SEQUENCE,
   UPDATE_SEQUENCE_NAME,
   DELETE_SEQUENCE,
@@ -49,6 +50,7 @@ const initialState = {
   currentSequence: {
     sequence: null,
     speed: 5,
+    mode: 0x3a,
   },
   sequences: __DEBUG__
     ? [
@@ -188,6 +190,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         currentSequence: {...state.currentSequence, speed: action.payload},
+      };
+
+    case SET_CURRENT_SEQUENCE_MODE:
+      return {
+        ...state,
+        currentSequence: {...state.currentSequence, mode: action.payload},
       };
 
     case UPDATE_SEQUENCE:
