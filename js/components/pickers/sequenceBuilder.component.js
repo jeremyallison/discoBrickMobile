@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {TouchableOpacity} from 'react-native';
 import {View} from 'native-base';
@@ -17,6 +17,12 @@ import {DotButton} from '../buttons.component';
 
 export const SequenceBuilder = ({sequenceIndex, sequence}) => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (sequence.colors.length === 0) {
+      addSequenceItem();
+    }
+  }, []);
 
   const openModal = useCallback(
     (itemIndex, item) => {
