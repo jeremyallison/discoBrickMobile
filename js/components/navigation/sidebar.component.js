@@ -28,7 +28,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   header: {
-    height: 200,
+    height: 250,
+    resizeMode: 'cover',
+    justifyContent: 'flex-end',
     width: '100%',
     marginBottom: 30,
   },

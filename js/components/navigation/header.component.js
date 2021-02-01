@@ -26,10 +26,10 @@ export const Header = ({openDrawerHandler}) => {
 
 const styles = StyleSheet.create({
   header: {
-    color: '#fff',
+    backgroundColor: '#fff',
   },
   headerLogo: {
-    height: 50,
+    height: 45,
     aspectRatio: 3,
   },
 });
