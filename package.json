@@ -23,7 +23,6 @@
     "react-native-ble-plx": "^2.0.2",
     "react-native-device-info": "^8.0.1",
     "react-native-draggable-flatlist": "^2.5.4",
-    "react-native-easy-grid": "^0.2.2",
     "react-native-gesture-handler": "^1.9.0",
     "react-native-hsv-color-picker": "file:/Users/j/www/react-native-hsv-color-picker",
     "react-native-reanimated": "^1.13.2",

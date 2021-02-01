@@ -1,7 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {H2} from 'native-base';
-import {Row, Grid} from 'react-native-easy-grid';
+import {H2, View} from 'native-base';
 import {debounce} from 'lodash';
 
 import {setCurrentColor, setCurrentPreset, setIsOn} from '../../store/actions';
@@ -43,8 +42,13 @@ export const ColorPickerPage = () => {
   return (
     <>
       {strips.length ? (
-        <Grid>
-          <Row size={0.2} style={{justifyContent: 'center', marginTop: 20}}>
+        <>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              marginBottom: 10,
+            }}>
             <DotButton
               big
               iconName="lightbulb-on-outline"
@@ -57,8 +61,8 @@ export const ColorPickerPage = () => {
               active={!isOn}
               onPress={() => handleOnOff(false)}
             />
-          </Row>
-          <Row
+          </View>
+          <View
             style={{flexDirection: 'column', alignItems: 'center', margin: 10}}>
             <H2 style={ThemeStyles.h2}>Find your shade...</H2>
             <ColorPicker
@@ -70,8 +74,8 @@ export const ColorPickerPage = () => {
               hsv={currentColor}
               colorChangeHandler={colorChangeHandler}
             />
-          </Row>
-        </Grid>
+          </View>
+        </>
       ) : (
         <DisconnectedPlaceholder />
       )}
