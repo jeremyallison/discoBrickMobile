@@ -13,7 +13,9 @@ export const SpeedSlider = ({value, onSpeedSelect, ...props}) => (
         marginRight: 10,
       }}>
       <Text style={{flex: 0, color: '#fff'}}>1</Text>
-      <Text style={{flex: 1, color: '#fff', textAlign: 'center'}}>Vitesse!</Text>
+      <Text style={{flex: 1, color: '#fff', textAlign: 'center'}}>
+        Vitesse!
+      </Text>
       <Text style={{flex: 0, color: '#fff'}}>5</Text>
     </View>
     <Slider

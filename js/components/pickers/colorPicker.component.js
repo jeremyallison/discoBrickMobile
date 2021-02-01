@@ -2,19 +2,15 @@ import React from 'react';
 import HsvColorPicker from 'react-native-hsv-color-picker';
 import {View} from 'react-native';
 
-import {hsv2rgb, rgb2hsv} from '../../utils/colors';
-
-export const ColorPicker = ({currentColor, colorChangeHandler}) => {
-  const hsv = rgb2hsv(currentColor);
-
+export const ColorPicker = ({hsv, colorChangeHandler}) => {
   const onSatValPickerChange = ({saturation, value}) => {
     const newHsv = {hue: hsv.hue, sat: saturation, val: value};
-    colorChangeHandler(hsv2rgb(newHsv));
+    colorChangeHandler(newHsv);
   };
 
   const onHuePickerChange = ({hue}) => {
     const newHsv = {hue: Math.min(hue, 359), sat: hsv.sat, val: hsv.val};
-    colorChangeHandler(hsv2rgb(newHsv));
+    colorChangeHandler(newHsv);
   };
 
   return (

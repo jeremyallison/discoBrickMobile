@@ -8,3 +8,6 @@ export const rgb2hsv = (rgb) => {
   const hsv = convert.rgb.hsv(Object.values(rgb));
   return {hue: hsv[0], sat: hsv[1] / 100, val: hsv[2] / 100};
 };
+
+export const arrayhsv2rgb = (hsvArray) =>
+  hsvArray.reduce((acc, color) => acc.concat(hsv2rgb(color)), []);

@@ -20,6 +20,7 @@ import {SequenceBuilder} from '../pickers/sequenceBuilder.component';
 import {ModalColorPicker} from '../pickers/modalColorPicker.component';
 import {SequenceModePicker} from '../pickers/sequenceModePicker.component';
 import {SpeedSlider} from '../pickers/speedSlider.component';
+import {arrayhsv2rgb} from '../../utils/colors';
 
 export const SequencePage = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,12 @@ export const SequencePage = () => {
   const handleAddSequence = () => dispatch(addSequence());
   const handleDeleteSequence = (i) => dispatch(deleteSequence(i));
   const handlePlay = (colors, sequenceIndex) => {
-    MagicLightBt.sendSequence(colors, currentMode, 6 - currentSpeed, strips);
+    MagicLightBt.sendSequence(
+      arrayhsv2rgb(colors),
+      currentMode,
+      6 - currentSpeed,
+      strips,
+    );
     dispatch(setCurrentSequence(sequenceIndex));
   };
 
@@ -45,7 +51,7 @@ export const SequencePage = () => {
   const handleSpeedChange = (speed) => {
     currentSequence !== null &&
       MagicLightBt.sendSequence(
-        sequences[currentSequence].colors,
+        arrayhsv2rgb(sequences[currentSequence].colors),
         currentMode,
         6 - speed,
         strips,
@@ -56,7 +62,7 @@ export const SequencePage = () => {
   const handleModeChange = (mode) => {
     currentSequence !== null &&
       MagicLightBt.sendSequence(
-        sequences[currentSequence].colors,
+        arrayhsv2rgb(sequences[currentSequence].colors),
         mode,
         6 - currentSpeed,
         strips,

@@ -14,6 +14,7 @@ import {QuickColors} from '../pickers/quickColors.component';
 
 import {DisconnectedPlaceholder} from '../disconnected.component';
 import {DotButton} from '../buttons.component';
+import {hsv2rgb} from '../../utils/colors';
 
 export const ColorPickerPage = () => {
   const strips = useSelector(({strips}) => strips);
@@ -22,7 +23,8 @@ export const ColorPickerPage = () => {
   const btSendColor = debounce(MagicLightBt.sendColor, 25);
 
   const colorChangeHandler = (color) => {
-    btSendColor(color, strips);
+    const rgbColor = hsv2rgb(color);
+    btSendColor(rgbColor, strips);
     store.dispatch(setCurrentPreset(null));
     store.dispatch(setCurrentColor(color));
   };
@@ -47,12 +49,12 @@ export const ColorPickerPage = () => {
             style={{flexDirection: 'column', alignItems: 'center', margin: 10}}>
             <H2 style={ThemeStyles.h2}>Find your shade...</H2>
             <ColorPicker
-              currentColor={currentColor}
+              hsv={currentColor}
               colorChangeHandler={colorChangeHandler}
             />
             <H2 style={ThemeStyles.h2}>...or quick pick a color</H2>
             <QuickColors
-              currentColor={currentColor}
+              hsv={currentColor}
               colorChangeHandler={colorChangeHandler}
             />
           </Row>

@@ -34,11 +34,11 @@ export const SequenceBuilder = ({sequenceIndex, sequence}) => {
       return false;
     }
 
-    const newColor = hsv2rgb({
+    const newColor = {
       hue: Math.round(Math.random() * 360),
       sat: 1,
       val: 1,
-    });
+    };
 
     dispatch(setColorPickerModalTarget(sequenceIndex, sequence.colors.length));
     dispatch(updateSequence(sequenceIndex, sequence.colors.concat([newColor])));
@@ -52,7 +52,7 @@ export const SequenceBuilder = ({sequenceIndex, sequence}) => {
         <TouchableOpacity
           onLongPress={drag}
           onPress={() => openModal(index, item)}>
-          <SequenceListItem color={item} />
+          <SequenceListItem color={hsv2rgb(item)} />
         </TouchableOpacity>
       );
     },

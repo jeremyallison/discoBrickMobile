@@ -36,11 +36,11 @@ const initialState = {
       ]
     : [],
   scanning: false,
-  currentColor: {r: 255, g: 255, b: 255},
+  currentColor: {hue: 0, sat: 1, val: 1},
   activeTab: Pages.COLOR_PICKER,
   colorPickerModal: {
     visible: false,
-    currentColor: {r: 255, g: 255, b: 255},
+    currentColor: {hue: 0, sat: 1, val: 1},
     target: null,
   },
   currentPreset: {
@@ -55,28 +55,18 @@ const initialState = {
   sequences: __DEBUG__
     ? [
         {
-          name: 'Test sequence 1',
+          name: 'RGB sequence',
           colors: [
-            {r: 255, g: 0, b: 0},
-            {r: 255, g: 255, b: 0},
-            {r: 0, g: 255, b: 0},
-            {r: 0, g: 255, b: 255},
-            {r: 0, g: 0, b: 255},
-            {r: 255, g: 0, b: 255},
-            {r: 255, g: 0, b: 0},
-            {r: 255, g: 255, b: 0},
-            {r: 0, g: 255, b: 0},
-            {r: 0, g: 255, b: 255},
-            {r: 0, g: 0, b: 255},
-            {r: 255, g: 0, b: 255},
+            {hue: 125, sat: 1, val: 1},
+            {hue: 0, sat: 1, val: 1},
+            {hue: 255, sat: 1, val: 1},
           ],
         },
         {
           name: 'Test sequence 2',
           colors: [
-            {r: 0, g: 0, b: 255},
-            {r: 0, g: 255, b: 0},
-            {r: 255, g: 0, b: 0},
+            {hue: 125, sat: 1, val: 1},
+            {hue: 287, sat: 1, val: 1},
           ],
         },
       ]

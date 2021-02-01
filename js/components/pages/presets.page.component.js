@@ -2,7 +2,6 @@ import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {StyleSheet} from 'react-native';
 import {H2, Text, Button, View} from 'native-base';
-import {Row, Grid} from 'react-native-easy-grid';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {DisconnectedPlaceholder} from '../disconnected.component';

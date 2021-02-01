@@ -32,7 +32,7 @@ export const ModalColorPicker = () => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <ColorPicker
-              currentColor={currentColor}
+              hsv={currentColor}
               strips={strips}
               colorChangeHandler={colorChangeHandler}
             />
