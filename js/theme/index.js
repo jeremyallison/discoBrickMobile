@@ -68,4 +68,8 @@ export const ThemeStyles = StyleSheet.create({
     marginLeft: 3,
     marginRight: 'auto',
   },
+  parameterFooter: {
+    padding: 10,
+    backgroundColor: 'rgba(255, 255, 255, .1)',
+  },
 });

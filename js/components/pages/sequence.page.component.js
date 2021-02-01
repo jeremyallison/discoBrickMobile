@@ -79,13 +79,13 @@ export const SequencePage = () => {
 
   return strips.length ? (
     <>
-      <Segment style={{margin: 10}}>{segmentButtons}</Segment>
-      <SpeedSlider
-        value={speed}
-        onSpeedSelect={setSpeed}
-        style={{margin: 10}}
-      />
-      <ScrollView style={{paddingTop: 10, paddingLeft: 10, paddingRight: 10, height: '100%'}}>
+      <ScrollView
+        style={{
+          paddingTop: 10,
+          paddingLeft: 10,
+          paddingRight: 10,
+          flex: 1,
+        }}>
         {sequences.map((sequence, i) => (
           <View key={i} style={styles.sequenceContainer}>
             <View style={styles.sequenceNameContainer}>
@@ -95,7 +95,6 @@ export const SequencePage = () => {
                 }
                 style={[ThemeStyles.h2, {flex: 1, fontSize: 20}]}
                 defaultValue={sequence.name}
-                autoCorrect={false}
               />
               <DotButton
                 onPress={() => handleDeleteSequence(i)}
@@ -116,8 +115,14 @@ export const SequencePage = () => {
           text="New sequence"
           style={{alignSelf: 'center', margin: 20}}
         />
+        <ModalColorPicker />
       </ScrollView>
-      <ModalColorPicker />
+      <View style={[ThemeStyles.parameterFooter, {height: 140}]}>
+        <Segment style={{backgroundColor: 'transparent', marginBottom: 15}}>
+          {segmentButtons}
+        </Segment>
+        <SpeedSlider value={speed} onSpeedSelect={setSpeed} />
+      </View>
     </>
   ) : (
     <DisconnectedPlaceholder />

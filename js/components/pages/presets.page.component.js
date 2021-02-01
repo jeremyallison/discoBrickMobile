@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {StyleSheet} from 'react-native';
-import {H2, Text, Button} from 'native-base';
+import {H2, Text, Button, View} from 'native-base';
 import {Row, Grid} from 'react-native-easy-grid';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -61,8 +61,8 @@ export const PresetsPage = () => {
   return (
     <>
       {strips.length ? (
-        <Grid>
-          <Row
+        <>
+          <View
             style={{
               flex: 1,
               flexDirection: 'row',
@@ -106,11 +106,11 @@ export const PresetsPage = () => {
                 </Button>
               );
             })}
-          </Row>
-          <Row size={0.2} style={{paddingLeft: 10, paddingRight: 10}}>
+          </View>
+          <View style={[ThemeStyles.parameterFooter, {height: 80}]}>
             <SpeedSlider value={speed} onSpeedSelect={setSpeed} />
-          </Row>
-        </Grid>
+          </View>
+        </>
       ) : (
         <DisconnectedPlaceholder />
       )}
