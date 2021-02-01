@@ -43,6 +43,6 @@ const styles = StyleSheet.create({
   languageSelector: {
     flexDirection: 'row',
     alignSelf: 'flex-end',
-    margin: 10,
+    margin: 20,
   },
 });

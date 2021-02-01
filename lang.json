@@ -29,8 +29,9 @@
       "White strobe": "Éclairs blanc",
       "Save color": "Enregistrer",
       "Connected bricks": "Bricks connectées",
-      "Available bricks": "Bricks visibles",
+      "Available bricks": "Bricks à proximité",
       "No brick connected": "Aucune brick connectée",
+      "Nothing connected yet": "Aucun appareil connecté",
       "Open the menu and turn on your DiscoBrick!": "Ouvre le menu et allume ta DiscoBrick!"
     }
   }

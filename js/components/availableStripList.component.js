@@ -116,8 +116,10 @@ const styles = StyleSheet.create({
   stripCategoryList: {
     flexDirection: 'column',
     alignItems: 'center',
+    alignSelf: 'center',
     width: '100%',
     paddingRight: 20,
     paddingLeft: 20,
+    paddingBottom: 20,
   },
 });
