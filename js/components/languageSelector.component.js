@@ -43,6 +43,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   languageButtonActive: {
-    backgroundColor: ThemeColors.highlight,
+    borderColor: ThemeColors.brightHighlight,
   },
 });

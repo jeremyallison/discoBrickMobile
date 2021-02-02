@@ -15,7 +15,7 @@ const pageTabs = [
   {page: Pages.SEQUENCES, text: 'Sequences', icon: 'repeat'},
 ];
 
-const a = ThemeColors.highlight,
+const a = ThemeColors.brightHighlight,
   b = ThemeColors.neutralGrey;
 
 export const Footer = () => {

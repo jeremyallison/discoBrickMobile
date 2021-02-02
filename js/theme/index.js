@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native';
 
 export const ThemeColors = {
   highlight: '#2d678e', // old #3f9dc3
+  brightHighlight: '#3f90c6',
   neutralGrey: '#444',
 };
 

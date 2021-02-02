@@ -18,6 +18,7 @@ import {
   clearAvailableStrips,
   setIsOn,
 } from '../store/actions';
+import { ThemeColors } from '../theme';
 
 export const AvailableStripList = (props) => {
   const dispatch = useDispatch();
@@ -78,7 +79,7 @@ export const AvailableStripList = (props) => {
               <CardItem>
                 <Icon size={25} name="led-strip-variant" />
                 <Text style={{flex: 1}}>{' ' + device.name}</Text>
-                <Icon size={25} name="bluetooth" color="#6bb1ff" />
+                <Icon size={25} name="bluetooth" color={ThemeColors.brightHighlight} />
               </CardItem>
             </Card>
           ))
