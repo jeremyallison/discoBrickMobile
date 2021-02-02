@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@fallingllama/react-native-hsv-color-picker": "^1.0.2",
-    "@react-native-community/async-storage": "^1.12.1",
+    "@react-native-async-storage/async-storage": "^1.13.4",
     "@react-native-community/slider": "^3.0.3",
     "Base64": "^1.1.0",
     "buffer": "^6.0.3",
