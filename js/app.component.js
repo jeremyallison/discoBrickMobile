@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react';
+import React from 'react';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {isEmulatorSync} from 'react-native-device-info';
@@ -17,9 +17,7 @@ export const App = () => (
       <Layout />
     ) : (
       <PersistGate loading={null} persistor={persistor}>
-        <Suspense fallback={null}>
-          <Layout />
-        </Suspense>
+        <Layout />
       </PersistGate>
     )}
   </Provider>

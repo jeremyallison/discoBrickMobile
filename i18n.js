@@ -4,18 +4,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import resources from './lang.json';
 
-export const LANG_STORAGE_KEY = '@lang';
+const LANG_STORAGE_KEY = '@lang';
 
 const languageDetector = {
   init: Function.prototype,
   type: 'languageDetector',
   async: true,
   detect: async (callback) => {
-    const lng = (await AsyncStorage.getItem(LANG_STORAGE_KEY)) || 'fr';
-    // const selectLanguage = lng || 'fr';
-    callback(lng);
+    callback((await AsyncStorage.getItem(LANG_STORAGE_KEY)) || 'fr');
   },
-  cacheUserLanguage: () => {},
+  cacheUserLanguage: async (lang) =>
+    await AsyncStorage.setItem(LANG_STORAGE_KEY, lang),
 };
 
 i18n
@@ -26,6 +25,9 @@ i18n
     keySeparator: false,
     interpolation: {
       escapeValue: false,
+    },
+    react: {
+      useSuspense: false,
     },
   });
 
