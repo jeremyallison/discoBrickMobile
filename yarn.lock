@@ -1136,6 +1136,14 @@
   dependencies:
     cross-spawn "^6.0.5"
 
+"@fallingllama/react-native-hsv-color-picker@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@fallingllama/react-native-hsv-color-picker/-/react-native-hsv-color-picker-1.0.2.tgz#98b2a074e34ac7e5fe66c6937abff4b6153dadaf"
+  integrity sha512-24Yqjzbalg+luLzros6n4qDREPd96wbEBgfz/6a/1TgTzJhnMOZT3rhA+gn4st9ku9MGYiLXwKICkbJz72/c0Q==
+  dependencies:
+    chroma-js "^2.1.0"
+    expo-linear-gradient "^8.0.0"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -7082,12 +7090,6 @@ react-native-gesture-handler@^1.9.0:
     hoist-non-react-statics "^3.3.0"
     invariant "^2.2.4"
     prop-types "^15.7.2"
-
-"react-native-hsv-color-picker@file:../react-native-hsv-color-picker":
-  version "1.0.1"
-  dependencies:
-    chroma-js "^2.1.0"
-    expo-linear-gradient "^8.0.0"
 
 react-native-iphone-x-helper@^1.0.3:
   version "1.3.1"

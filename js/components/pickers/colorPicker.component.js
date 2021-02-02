@@ -1,5 +1,5 @@
 import React from 'react';
-import HsvColorPicker from 'react-native-hsv-color-picker';
+import HsvColorPicker from '@fallingllama/react-native-hsv-color-picker';
 import {View} from 'react-native';
 
 export const ColorPicker = ({hsv, colorChangeHandler}) => {
