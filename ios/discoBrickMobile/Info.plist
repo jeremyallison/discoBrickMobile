@@ -21,13 +21,13 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<true/>
+		<false/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>localhost</key>
@@ -38,7 +38,9 @@
 		</dict>
 	</dict>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Your DiscoBrick needs to be configured over Bluetooth</string>
+	<string>Your DiscoBrick device needs to be configured over Bluetooth</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Your DiscoBrick device needs to be configured over Bluetooth</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>UIAppFonts</key>
@@ -69,12 +71,12 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UISceneDelegateClassName</key>
+	<string>SceneDelegate</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>UISceneDelegateClassName</key>
-	<string>SceneDelegate</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>
